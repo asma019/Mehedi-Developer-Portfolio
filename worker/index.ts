@@ -17,6 +17,7 @@ interface Env {
     send: (params: {
       to: string;
       from: string;
+      reply_to?: string;
       subject: string;
       html?: string;
       text?: string;
