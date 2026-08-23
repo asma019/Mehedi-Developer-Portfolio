@@ -1,0 +1,306 @@
+@import "tailwindcss";
+@import "@fontsource-variable/inter";
+@import "@fontsource-variable/space-grotesk";
+
+@custom-variant light (&:where(.light, .light *));
+
+/* ─────────────────────────────────────────────────────────────
+   OBSIDIAN AURORA — dark-first design system
+   Dark is the default (no class); `.light` on <html> opts in.
+   ───────────────────────────────────────────────────────────── */
+
+:root {
+  --bg: #050507;
+  --alt: #0a0a10;
+  --surface: #0e0e15;
+  --surface-2: #15151e;
+  --ink: #f5f5f7;
+  --muted: #9c9ca8;
+  --line: rgba(255, 255, 255, 0.09);
+  --line-strong: rgba(255, 255, 255, 0.16);
+  --accent: #7c5cff;
+  --accent-strong: #9d81ff;
+  --accent-2: #22d3ee;
+  --accent-soft: rgba(124, 92, 255, 0.16);
+  --nav-bg: rgba(10, 10, 16, 0.55);
+  --pill-bg: rgba(13, 13, 20, 0.6);
+  --card-shadow: 0 4px 24px rgba(0, 0, 0, 0.4);
+  --card-shadow-hover: 0 24px 60px rgba(0, 0, 0, 0.6);
+  --hero-glow-opacity: 0.4;
+  --spot-color: rgba(124, 92, 255, 0.14);
+  color-scheme: dark;
+}
+
+.light {
+  --bg: #fafafc;
+  --alt: #f1f1f6;
+  --surface: #ffffff;
+  --surface-2: #f5f5f9;
+  --ink: #101018;
+  --muted: #5f5f6b;
+  --line: rgba(16, 16, 24, 0.09);
+  --line-strong: rgba(16, 16, 24, 0.16);
+  --accent: #6a3dff;
+  --accent-strong: #8b6cff;
+  --accent-2: #0891b2;
+  --accent-soft: rgba(106, 61, 255, 0.09);
+  --nav-bg: rgba(255, 255, 255, 0.6);
+  --pill-bg: rgba(255, 255, 255, 0.66);
+  --card-shadow: 0 4px 24px rgba(16, 16, 24, 0.06);
+  --card-shadow-hover: 0 20px 48px rgba(16, 16, 24, 0.12);
+  --hero-glow-opacity: 0.5;
+  --spot-color: rgba(106, 61, 255, 0.08);
+  color-scheme: light;
+}
+
+@theme inline {
+  --color-bg: var(--bg);
+  --color-alt: var(--alt);
+  --color-surface: var(--surface);
+  --color-surface-2: var(--surface-2);
+  --color-ink: var(--ink);
+  --color-muted: var(--muted);
+  --color-line: var(--line);
+  --color-line-strong: var(--line-strong);
+  --color-accent: var(--accent);
+  --color-accent-strong: var(--accent-strong);
+  --color-accent-soft: var(--accent-soft);
+  --color-accent-2: var(--accent-2);
+  --font-sans: "Inter Variable", -apple-system, BlinkMacSystemFont, "SF Pro Display",
+    "Segoe UI", Roboto, Arial, sans-serif;
+  --font-display: "Space Grotesk Variable", "Inter Variable", -apple-system,
+    "SF Pro Display", "Segoe UI", sans-serif;
+}
+
+html {
+  scroll-behavior: smooth;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+/* Kill horizontal page panning on mobile. `clip` is stronger than
+   `hidden` and (unlike hidden) does not break position:sticky. */
+html,
+body {
+  overflow-x: hidden;
+}
+@supports (overflow-x: clip) {
+  html,
+  body {
+    overflow-x: clip;
+  }
+}
+
+body {
+  background: var(--bg);
+  color: var(--ink);
+  font-family: var(--font-sans);
+  transition: background-color 0.45s ease, color 0.45s ease;
+}
+
+::selection {
+  background: var(--accent);
+  color: #fff;
+}
+
+/* Scrollbar */
+::-webkit-scrollbar {
+  width: 10px;
+}
+::-webkit-scrollbar-track {
+  background: var(--bg);
+}
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(var(--accent), var(--accent-2));
+  border-radius: 999px;
+  border: 2px solid var(--bg);
+}
+
+/* Frosted glass surfaces */
+.glass {
+  background: var(--nav-bg);
+  backdrop-filter: saturate(160%) blur(18px);
+  -webkit-backdrop-filter: saturate(160%) blur(18px);
+}
+
+/* Heavier pill glass — the floating menu surface */
+.glass-strong {
+  background: var(--pill-bg);
+  backdrop-filter: saturate(180%) blur(28px);
+  -webkit-backdrop-filter: saturate(180%) blur(28px);
+}
+
+/* Aurora gradient text */
+.text-gradient {
+  background: linear-gradient(
+    96deg,
+    var(--accent) 0%,
+    var(--accent-strong) 45%,
+    var(--accent-2) 100%
+  );
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
+}
+
+/* Card look */
+.card {
+  background: var(--surface);
+  border: 1px solid var(--line);
+  box-shadow: var(--card-shadow);
+  transition: transform 0.45s cubic-bezier(0.22, 1, 0.36, 1),
+    box-shadow 0.45s cubic-bezier(0.22, 1, 0.36, 1), border-color 0.3s ease;
+}
+
+.card-hover:hover {
+  transform: translateY(-5px);
+  box-shadow: var(--card-shadow-hover);
+  border-color: var(--line-strong);
+}
+
+/* Hover glow tinted per element via --glow-c / --glow-b custom properties */
+.glow-hover {
+  transition: transform 0.45s cubic-bezier(0.22, 1, 0.36, 1),
+    box-shadow 0.45s cubic-bezier(0.22, 1, 0.36, 1), border-color 0.3s ease;
+}
+.glow-hover:hover {
+  transform: translateY(-5px);
+  box-shadow:
+    0 18px 60px -14px var(--glow-c, rgba(124, 92, 255, 0.45)),
+    var(--card-shadow-hover);
+  border-color: var(--glow-b, var(--line-strong));
+}
+
+/* Cursor-following radial spotlight (driven by --mx / --my CSS vars) */
+.spotlight {
+  position: relative;
+  isolation: isolate;
+}
+.spotlight::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  border-radius: inherit;
+  background: radial-gradient(
+    520px circle at var(--mx, 50%) var(--my, 50%),
+    var(--spot-color),
+    transparent 45%
+  );
+  opacity: 0;
+  transition: opacity 0.45s ease;
+  pointer-events: none;
+}
+.spotlight:hover::before {
+  opacity: 1;
+}
+
+/* Infinite marquee */
+@keyframes marquee {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+.animate-marquee {
+  animation: marquee 34s linear infinite;
+}
+.animate-marquee:hover {
+  animation-play-state: paused;
+}
+
+.marquee-mask {
+  mask-image: linear-gradient(
+    to right,
+    transparent,
+    black 12%,
+    black 88%,
+    transparent
+  );
+  -webkit-mask-image: linear-gradient(
+    to right,
+    transparent,
+    black 12%,
+    black 88%,
+    transparent
+  );
+}
+
+/* Slow ambient blob drift */
+@keyframes drift {
+  0%,
+  100% {
+    transform: translate(0, 0) scale(1);
+  }
+  33% {
+    transform: translate(30px, -24px) scale(1.06);
+  }
+  66% {
+    transform: translate(-24px, 20px) scale(0.96);
+  }
+}
+
+.animate-drift {
+  animation: drift 16s ease-in-out infinite;
+}
+
+/* Fine film-grain noise overlay */
+.noise::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0.04;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+/* HUD corner brackets — techy frame that lights up on hover */
+.hud {
+  position: relative;
+}
+.hud::before,
+.hud::after {
+  content: "";
+  position: absolute;
+  width: 14px;
+  height: 14px;
+  border-color: var(--accent);
+  opacity: 0.35;
+  pointer-events: none;
+  transition: width 0.35s cubic-bezier(0.22, 1, 0.36, 1),
+    height 0.35s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.3s ease;
+}
+.hud::before {
+  top: 10px;
+  left: 10px;
+  border-top: 1.5px solid;
+  border-left: 1.5px solid;
+  border-top-left-radius: 5px;
+}
+.hud::after {
+  bottom: 10px;
+  right: 10px;
+  border-bottom: 1.5px solid;
+  border-right: 1.5px solid;
+  border-bottom-right-radius: 5px;
+}
+.hud:hover::before,
+.hud:hover::after {
+  opacity: 1;
+  width: 22px;
+  height: 22px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  .animate-marquee,
+  .animate-drift {
+    animation: none;
+  }
+}

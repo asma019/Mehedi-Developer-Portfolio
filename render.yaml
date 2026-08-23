@@ -1,0 +1,29 @@
+# Render blueprint — deploy as a Node web service (runs server.js,
+# which serves dist/ and handles /api/contact over SMTP).
+# Docs: https://render.com/docs/blueprint-spec
+services:
+  - type: web
+    name: mehedi-portfolio
+    runtime: node
+    plan: free
+    buildCommand: npm ci && npm run build
+    startCommand: node server.js
+    envVars:
+      - key: NODE_VERSION
+        value: 20.19.0
+      - key: VITE_SITE_URL
+        sync: false
+      - key: SMTP_HOST
+        sync: false
+      - key: SMTP_PORT
+        sync: false
+      - key: SMTP_USER
+        sync: false
+      - key: SMTP_PASS
+        sync: false
+      - key: SMTP_SECURE
+        sync: false
+      - key: MAIL_FROM
+        sync: false
+      - key: MAIL_TO
+        sync: false

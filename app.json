@@ -1,0 +1,21 @@
+{
+  "name": "mehedi-portfolio",
+  "description": "Portfolio of Mehedi Hasan — Web Developer & Support Engineer. Vite SPA served by a Node server with an SMTP contact form.",
+  "website": "https://mehedims.com/",
+  "repository": "https://github.com/asma019",
+  "logo": "https://mehedims.com/favicon.svg",
+  "keywords": ["portfolio", "vite", "react", "node", "contact-form"],
+  "env": {
+    "VITE_SITE_URL": {
+      "description": "Canonical domain of the site, e.g. https://mehedims.com",
+      "required": true
+    },
+    "SMTP_HOST": { "description": "SMTP host, e.g. smtp.gmail.com", "required": true },
+    "SMTP_PORT": { "description": "SMTP port (587 or 465)", "required": true },
+    "SMTP_USER": { "description": "SMTP username", "required": true },
+    "SMTP_PASS": { "description": "SMTP password / app password", "required": true },
+    "SMTP_SECURE": { "description": "true for port 465, false for 587", "required": false },
+    "MAIL_FROM": { "description": "From header for contact emails", "required": false },
+    "MAIL_TO": { "description": "Inbox that receives contact emails", "required": true }
+  }
+}
