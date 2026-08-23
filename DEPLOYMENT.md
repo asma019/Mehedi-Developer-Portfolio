@@ -45,16 +45,20 @@ platform's dashboard for deployments.
 4. Deploy. `netlify/functions/contact.mjs` is exposed at `/api/contact`
    by the redirect in `netlify.toml`.
 
-## Cloudflare (Pages / Workers)
+## Cloudflare (Workers + Static Assets)
 
-1. https://dash.cloudflare.com → Workers & Pages → Create → Pages →
-   Connect to Git.
-2. Build command `npm run build`, output dir `dist`. `wrangler.toml`
-   and `functions/api/contact.ts` are picked up automatically.
-3. Settings → Variables: set `VITE_SITE_URL`, `MAIL_FROM`, `MAIL_TO`
-   and **`RESEND_API_KEY`** (Workers cannot use raw SMTP — the form sends
-   through Resend's HTTP API; free tier works).
-4. CLI alternative: `npx wrangler pages deploy dist --project-name mehedi-portfolio`.
+1. https://dash.cloudflare.com → Workers & Pages → Create → connect your
+   Git repo (Workers Builds flow).
+2. Build command `npm run build`, deploy command `npx wrangler deploy`
+   (the default). `wrangler.toml` + `worker/index.ts` handle everything:
+   static assets from `dist/`, styled 404 page, and `/api/contact`.
+3. Settings → Variables and Secrets: set `VITE_SITE_URL`, `MAIL_FROM`,
+   `MAIL_TO` and **`RESEND_API_KEY`** (Workers cannot use raw SMTP — the
+   form sends through Resend's HTTP API; free tier works).
+4. CLI alternative: `npx wrangler deploy`.
+
+> Note: if you previously created a **Pages** project with the same name,
+> delete it first — this repo now deploys as a Worker with static assets.
 
 ## Render
 

@@ -72,14 +72,17 @@ Click to expand the complete page, top to bottom:
 | Render | [![Deploy to Render](https://render.com/images/deploy/render.svg)](https://dashboard.render.com/blueprints/new?repo=https%3A%2F%2Fgithub.com%2Fasma019%2FMehedi-Developer-Portfolio) |
 | Heroku | [![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy?template=https%3A%2F%2Fgithub.com%2Fasma019%2FMehedi-Developer-Portfolio) |
 
-**Cloudflare Pages:**
+**Cloudflare (Workers):**
 
 ```bash
 git clone https://github.com/asma019/Mehedi-Developer-Portfolio
 cd Mehedi-Developer-Portfolio
 npm ci && npm run build
-npx wrangler pages deploy dist --project-name your-portfolio
+npx wrangler deploy
 ```
+
+Or connect the repo in the Cloudflare dashboard — build command
+`npm run build`, deploy command `npx wrangler deploy` (the default).
 
 > After deploying, set your env vars (site URL + SMTP or Resend) in the
 > platform dashboard — see [DEPLOYMENT.md](DEPLOYMENT.md) for the full guide.
@@ -138,7 +141,7 @@ socials. The CV, marquee and all sections read from it.
 
 ```
 ├── api/contact.ts              # Vercel function (/api/contact)
-├── functions/api/contact.ts    # Cloudflare Pages function (Resend)
+├── worker/index.ts             # Cloudflare Worker (static assets + /api/contact)
 ├── netlify/functions/          # Netlify function
 ├── server/                     # shared contact logic + SMTP/Resend senders
 ├── server.js                   # Node server (Render/Heroku): dist/ + API

@@ -1,5 +1,16 @@
-# Cloudflare Pages configuration (functions/ dir is auto-detected).
-# Deploy: `npx wrangler pages deploy dist --project-name mehedi-portfolio`
+# Cloudflare Workers + Static Assets configuration.
+# Deploy: `npx wrangler deploy` (also used by Cloudflare's Git-connected
+# Workers builds — build command `npm run build`, deploy command above).
+#
+# Dashboard variables to set: RESEND_API_KEY, MAIL_FROM, MAIL_TO
+# (Workers cannot open SMTP sockets — the contact form sends through
+# Resend's HTTP API instead).
 name = "mehedi-portfolio"
-pages_build_output_dir = "dist"
+main = "worker/index.ts"
 compatibility_date = "2026-08-23"
+compatibility_flags = ["nodejs_compat"]
+
+[assets]
+directory = "./dist"
+# Unknown paths serve dist/404.html (the styled 404 page) with a 404 status
+not_found_handling = "404-page"
