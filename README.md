@@ -5,12 +5,15 @@ a premium **floating glass menu**, unique per-section designs, a real **SMTP
 contact form**, full **SEO + AI-ready** metadata — deployable to **Vercel,
 Netlify, Cloudflare, Render and Heroku** from a single repo.
 
-![License](https://img.shields.io/badge/license-MIT-blue.svg)
-![Vite](https://img.shields.io/badge/Vite-8-646CFF?logo=vite&logoColor=white)
-![React](https://img.shields.io/badge/React-19-61DAFB?logo=react&logoColor=white)
-![TypeScript](https://img.shields.io/badge/TypeScript-strict-3178C6?logo=typescript&logoColor=white)
-![Three.js](https://img.shields.io/badge/Three.js-r185-000000?logo=three.js)
-![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)
+<p align="center">
+  <img src="https://img.shields.io/github/stars/asma019/Mehedi-Developer-Portfolio?style=flat&label=Stars&color=ffc95c" alt="GitHub stars">
+  <img src="https://img.shields.io/badge/license-MIT-blue.svg" alt="License">
+  <img src="https://img.shields.io/badge/Vite-8-646CFF?logo=vite&logoColor=white" alt="Vite">
+  <img src="https://img.shields.io/badge/React-19-61DAFB?logo=react&logoColor=white" alt="React">
+  <img src="https://img.shields.io/badge/TypeScript-strict-3178C6?logo=typescript&logoColor=white" alt="TypeScript">
+  <img src="https://img.shields.io/badge/Three.js-r185-000000?logo=three.js" alt="Three.js">
+  <img src="https://img.shields.io/badge/PRs-welcome-brightgreen.svg" alt="PRs Welcome">
+</p>
 
 ![Mehedi Developer Portfolio](docs/preview.jpg)
 
