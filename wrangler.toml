@@ -2,13 +2,19 @@
 # Deploy: `npx wrangler deploy` (also used by Cloudflare's Git-connected
 # Workers builds — build command `npm run build`, deploy command above).
 #
-# Dashboard variables to set: RESEND_API_KEY, MAIL_FROM, MAIL_TO
-# (Workers cannot open SMTP sockets — the contact form sends through
-# Resend's HTTP API instead).
+# Dashboard variables to set: MAIL_FROM, MAIL_TO
+# (the EMAIL binding handles authentication — no API token needed).
 name = "mehedi-portfolio"
 main = "worker/index.ts"
 compatibility_date = "2026-08-23"
 compatibility_flags = ["nodejs_compat"]
+
+# Email Sending Worker binding — no API token required.
+# Emails are dispatched via env.EMAIL.send() in the worker code.
+# The "from" address must be a verified domain in your Cloudflare account.
+[[send_email]]
+name = "EMAIL"
+remote = true
 
 [assets]
 directory = "./dist"
