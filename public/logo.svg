@@ -1,13 +1,1 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
-  <defs>
-    <linearGradient id="aurora" x1="14" y1="36" x2="51" y2="36" gradientUnits="userSpaceOnUse">
-      <stop offset="0" stop-color="#7c5cff"/>
-      <stop offset="0.55" stop-color="#9d81ff"/>
-      <stop offset="1" stop-color="#22d3ee"/>
-    </linearGradient>
-  </defs>
-
-  <!-- mark only — transparent background -->
-  <path d="M14 46V24l13 12 13-12v22" fill="none" stroke="url(#aurora)" stroke-width="6.5" stroke-linecap="round" stroke-linejoin="round"/>
-  <rect x="46" y="33" width="4.5" height="13" rx="2.2" fill="#22d3ee"/>
-</svg>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64"><defs><linearGradient id="aurora" x1="14" x2="51" y1="36" y2="36" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="#7c5cff"/><stop offset=".55" stop-color="#9d81ff"/><stop offset="1" stop-color="#22d3ee"/></linearGradient></defs><path fill="none" stroke="url(#aurora)" stroke-linecap="round" stroke-linejoin="round" stroke-width="6.5" d="M14 46V24l13 12 13-12v22"/><rect width="4.5" height="13" x="46" y="33" fill="#22d3ee" rx="2.2"/></svg>
