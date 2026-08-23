@@ -18,7 +18,7 @@ export async function sendViaEmailBinding({ name, email, message }, emailBinding
 
   const response = await emailBinding.send({
     to: process.env.MAIL_TO || "hello@mehedims.com",
-    from: process.env.MAIL_FROM || "welcome@mehedims.com",
+    from: process.env.MAIL_FROM || "no-reply@mehedims.com",
     reply_to: email,
     subject: `Portfolio contact from ${name}`,
     html: `<h1>New contact message</h1>
