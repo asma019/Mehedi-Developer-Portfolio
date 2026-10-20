@@ -1,5 +1,5 @@
 /**
- * Blog posts - rendered at #/blog/<slug>, index at /blog or #/blog.
+ * Blog posts - served at the real path /blog/<slug>, index at /blog.
  *
  * The body is a typed block list rather than raw markdown: no parser
  * dependency, and the inline renderer in PostView handles **bold** and
@@ -90,7 +90,7 @@ export const posts: Post[] = [
       },
       {
         type: "p",
-        text: "This post is a working draft and I am still tightening it. If you would rather have someone run this loop on your site than read about it, [get in touch](#/contact).",
+        text: "This post is a working draft and I am still tightening it. If you would rather have someone run this loop on your site than read about it, [get in touch](/#contact).",
       },
     ],
   },
@@ -158,7 +158,7 @@ export const posts: Post[] = [
       },
       {
         type: "p",
-        text: "Ten lines. Any engineer reading this walks straight to the plugin update. That is a draft in the right direction. If your team writes tickets like this and you want that energy on your own stack, [my contact form](#/contact) is at the bottom of every page.",
+        text: "Ten lines. Any engineer reading this walks straight to the plugin update. That is a draft in the right direction. If your team writes tickets like this and you want that energy on your own stack, [my contact form](/#contact) is at the bottom of every page.",
       },
     ],
   },
@@ -224,7 +224,7 @@ export const posts: Post[] = [
       },
       {
         type: "p",
-        text: "Still a working draft, and I will keep tightening it. If you are the one inheriting a project someone else left behind, [that is also a thing I do](#/contact).",
+        text: "Still a working draft, and I will keep tightening it. If you are the one inheriting a project someone else left behind, [that is also a thing I do](/#contact).",
       },
     ],
   },
@@ -303,7 +303,7 @@ export const posts: Post[] = [
       },
       {
         type: "p",
-        text: "This one gets rewritten occasionally as I learn better ways to explain it. If you are staring at a zone file at midnight, [the contact form](#/contact) is right there, and DNS emergencies are a normal Tuesday for me.",
+        text: "This one gets rewritten occasionally as I learn better ways to explain it. If you are staring at a zone file at midnight, [the contact form](/#contact) is right there, and DNS emergencies are a normal Tuesday for me.",
       },
     ],
   },

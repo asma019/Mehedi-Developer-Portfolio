@@ -4,6 +4,8 @@ import tailwindcss from "@tailwindcss/vite";
 import { writeFileSync, mkdirSync, readFileSync } from "node:fs";
 import { join } from "node:path";
 import { SITE } from "./src/data/site";
+import { posts } from "./src/data/posts";
+import { cases } from "./src/data/cases";
 
 /**
  * Fills the %SITE_*% placeholders in index.html from src/data/site.ts -
@@ -56,6 +58,26 @@ function generateSeoFiles(): Plugin {
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
+${posts
+  .map(
+    (p) => `  <url>
+    <loc>${site}/blog/${p.slug}/</loc>
+    <lastmod>${today}</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>`,
+  )
+  .join("\n")}
+${Object.values(cases)
+  .map(
+    (c) => `  <url>
+    <loc>${site}/case/${c.slug}/</loc>
+    <lastmod>${today}</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>`,
+  )
+  .join("\n")}
 </urlset>
 `,
       );
@@ -106,6 +128,12 @@ Portfolio: ${site}/
 Blog: ${site}/blog/
 CV (PDF): ${site}/Mehedi-Hasan-CV.pdf
 
+## Blog posts
+
+${posts
+  .map((p) => `- [${p.title}](${site}/blog/${p.slug}/) - ${p.excerpt}`)
+  .join("\n")}
+
 ## Services
 
 - Full-stack web development - React, Next.js, Go, PHP/Laravel, Python, MySQL, PostgreSQL, Redis
@@ -148,14 +176,22 @@ Available for freelance projects. Reach out through the website contact form at 
       // 404.html - Netlify / Cloudflare Pages / Vercel serve this with a
       // real 404 status for unknown paths; the SPA inside renders the
       // styled NotFound view (App checks location.pathname).
-      // blog/index.html does the same for /blog, but with a real 200:
-      // the app renders the Blog index when pathname is /blog.
+      // Real SPA views get their own copy with a proper 200: the app
+      // renders Blog / BlogPost when pathname is /blog or /blog/<slug>.
       try {
         const index = readFileSync(join(dist, "index.html"), "utf8");
         writeFileSync(join(dist, "404.html"), index);
         mkdirSync(join(dist, "blog"), { recursive: true });
         writeFileSync(join(dist, "blog", "index.html"), index);
-        console.log("404.html and blog/index.html generated");
+        for (const p of posts) {
+          mkdirSync(join(dist, "blog", p.slug), { recursive: true });
+          writeFileSync(join(dist, "blog", p.slug, "index.html"), index);
+        }
+        for (const c of Object.values(cases)) {
+          mkdirSync(join(dist, "case", c.slug), { recursive: true });
+          writeFileSync(join(dist, "case", c.slug, "index.html"), index);
+        }
+        console.log("404.html and blog/case index files generated");
       } catch {
         /* index.html missing - skip */
       }

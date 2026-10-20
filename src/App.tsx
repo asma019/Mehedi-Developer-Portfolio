@@ -23,8 +23,16 @@ import { SITE } from "./data/site";
 /** The site is a single page with hash navigation - any real pathname
  *  other than the root, /index.html or /blog is a 404. (/blog is served
  *  as a static index file at build, see vite.config.ts.) */
+/* The site is a single page with hash navigation. Real blog paths
+   (/blog and /blog/<slug>) and /case/<slug> are whitelisted SPA views;
+   everything else is a 404. (/blog/* and /case/* are generated as
+   static index files at build, see vite.config.ts.) */
 function isBlogPath(pathname: string) {
-  return pathname.replace(/\/+$/, "").toLowerCase() === "/blog";
+  return /^\/blog(\/[a-z0-9-]+)?$/i.test(pathname.replace(/\/+$/, ""));
+}
+
+function isCasePath(pathname: string) {
+  return /^\/case\/[a-z0-9-]+$/i.test(pathname.replace(/\/+$/, ""));
 }
 
 function isHomePath(pathname: string) {
@@ -38,15 +46,24 @@ type Route =
   | { view: "blog" }
   | { view: "home"; hash: string };
 
-/** #/case/<slug> and #/blog/<slug> are content views, #/blog is the blog
- *  index. The real /blog path (or #/blog from anywhere) opens the index.
+/** Real paths win: /blog = index, /blog/<slug> = post, /case/<slug> =
+ *  case study. Hash forms (#/blog <slug>...) still work as legacy links.
  *  Any other hash (#contact, empty) is an in-page anchor on the home page. */
-function parseHash(): Route {
+function parseRoute(): Route {
   const raw = typeof window !== "undefined" ? window.location.hash : "";
-  const path = typeof window !== "undefined" ? window.location.pathname : "/";
+  const path = (typeof window !== "undefined" ? window.location.pathname : "/")
+    .replace(/\/+$/, "")
+    .toLowerCase();
+
+  const pathBlog = path.match(/^\/blog\/([a-z0-9-]+)$/);
+  if (pathBlog) return { view: "post", slug: pathBlog[1] };
+  if (isBlogPath(path)) return { view: "blog" };
+  const pathCase = path.match(/^\/case\/([a-z0-9-]+)$/);
+  if (pathCase) return { view: "case", slug: pathCase[1] };
+
   const m = raw.match(/^#\/(case|blog)\/([A-Za-z0-9-]+)/);
   if (m) return m[1] === "case" ? { view: "case", slug: m[2] } : { view: "post", slug: m[2] };
-  if (raw === "#/blog" || isBlogPath(path)) return { view: "blog" };
+  if (raw === "#/blog") return { view: "blog" };
   return { view: "home", hash: raw };
 }
 
@@ -59,11 +76,15 @@ export default function App() {
   );
 
   const [is404] = useState(
-    () => typeof window !== "undefined" && !isHomePath(window.location.pathname),
+    () =>
+      typeof window !== "undefined" &&
+      !isHomePath(window.location.pathname) &&
+      !isBlogPath(window.location.pathname) &&
+      !isCasePath(window.location.pathname),
   );
 
-  const [route, setRoute] = useState<Route>(parseHash);
-  const prevView = useRef(parseHash().view);
+  const [route, setRoute] = useState<Route>(parseRoute);
+  const prevView = useRef(parseRoute().view);
 
   const toggleTheme = useCallback(() => {
     setLight((prev) => {
@@ -79,7 +100,7 @@ export default function App() {
   }, []);
 
   useEffect(() => {
-    const onHash = () => setRoute(parseHash());
+    const onHash = () => setRoute(parseRoute());
     window.addEventListener("hashchange", onHash);
     return () => window.removeEventListener("hashchange", onHash);
   }, []);

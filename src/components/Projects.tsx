@@ -118,7 +118,7 @@ function ProjectCard({
             onClick={(e) => {
               e.preventDefault();
               e.stopPropagation();
-              window.location.hash = `#/case/${hasCase(project.name)!.slug}`;
+              window.location.href = `/case/${hasCase(project.name)!.slug}`;
             }}
             className="mt-6 inline-flex items-center gap-2 text-[15px] font-semibold text-accent transition-colors hover:text-accent-2"
           >

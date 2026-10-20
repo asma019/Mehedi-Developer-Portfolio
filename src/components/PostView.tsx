@@ -45,7 +45,7 @@ export default function BlogPost({ post }: { post: Post }) {
       <article className="mx-auto w-full max-w-3xl px-5 pt-32 pb-24 sm:px-8 sm:pt-40">
         <motion.div initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }}>
           <a
-            href="#writing"
+            href="/#writing"
             className="inline-flex items-center gap-2 text-sm font-semibold text-muted transition-colors hover:text-accent"
           >
             <ArrowLeft size={16} /> All notes

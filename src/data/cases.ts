@@ -1,6 +1,6 @@
 /**
  * Case studies - long-form write-ups the project cards can link to.
- * Routes render at #/case/<slug> (see App.tsx).
+ * Served at the real path /case/<slug> (see App.tsx + vite.config.ts).
  *
  * ethically honest scaffolding: every number that isn't verified lives
  * behind a TODO - fill real metrics in `metrics` when you have them and

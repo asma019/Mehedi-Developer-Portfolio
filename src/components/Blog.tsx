@@ -53,7 +53,7 @@ export default function Blog() {
                   hidden: { opacity: 0, y: 14 },
                   show: { opacity: 1, y: 0 },
                 }}
-                href={`#/blog/${post.slug}`}
+                href={`/blog/${post.slug}`}
                 className="group relative py-8 transition-colors duration-300 hover:bg-surface/40"
               >
                 <span className="absolute left-0 top-0 h-full w-[2.5px] origin-top scale-y-0 bg-gradient-to-b from-accent to-accent-2 transition-transform duration-400 ease-out group-hover:scale-y-100" aria-hidden />

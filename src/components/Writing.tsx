@@ -58,7 +58,7 @@ export default function Writing() {
             <motion.a
               key={post.title}
               variants={staggerChild}
-              href={`#/blog/${post.slug}`}
+              href={`/blog/${post.slug}`}
               className={cls}
             >
               {inner}
@@ -74,7 +74,7 @@ export default function Writing() {
         <Reveal delay={0.1}>
           <div className="mt-10 flex justify-center">
             <a
-              href="#/blog"
+              href="/blog"
               className="inline-flex items-center gap-2 rounded-full border border-accent/35 bg-accent-soft px-6 py-3 text-sm font-semibold text-accent transition-all duration-300 hover:bg-gradient-to-r hover:from-accent hover:to-accent-2 hover:text-white"
             >
               All notes on the blog

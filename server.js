@@ -120,8 +120,9 @@ const server = http.createServer(async (req, res) => {
       return serveFile(res, join(DIST, "index.html"), "no-cache");
     }
 
-    // /blog is a real SPA view (static file generated at build)
-    if (path.replace(/\/+$/, "") === "/blog") {
+    // /blog, /blog/<slug> and /case/<slug> are real SPA views
+    // (static files generated at build)
+    if (/^\/(blog(\/[a-zA-Z0-9-]+)?|case\/[a-zA-Z0-9-]+)\/?$/.test(path)) {
       return serveFile(res, join(DIST, "index.html"), "no-cache");
     }
 
