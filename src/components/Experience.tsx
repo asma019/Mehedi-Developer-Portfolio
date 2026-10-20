@@ -147,11 +147,14 @@ export default function Experience() {
   const wrapRef = useRef<HTMLDivElement>(null);
   const trackRef = useRef<HTMLDivElement>(null);
   const x = useMotionValue(0);
+  const maxXRef = useRef(0);
 
   const [step, setStep] = useState(1);
   const [maxX, setMaxX] = useState(0);
   const [maxIndex, setMaxIndex] = useState(0);
   const [index, setIndex] = useState(0);
+  const stepRef = useRef(1);
+  const settleTimer = useRef<number | null>(null);
 
   const progress = useTransform(x, (v) =>
     maxX > 0 ? Math.min(1, Math.max(0, -v / maxX)) : 0,
@@ -166,6 +169,8 @@ export default function Experience() {
       if (!wrap || !track || !first) return;
       const s = first.offsetWidth + GAP;
       const range = Math.max(0, track.scrollWidth - wrap.clientWidth);
+      maxXRef.current = range;
+      stepRef.current = s;
       setStep(s);
       setMaxX(range);
       setMaxIndex(Math.round(range / s));
@@ -174,6 +179,51 @@ export default function Experience() {
     window.addEventListener("resize", measure);
     return () => window.removeEventListener("resize", measure);
   }, []);
+
+  /* Trackpad / touchpad gesture support: a horizontal two-finger swipe
+     (wheel events with dominant deltaX) drives the carousel directly,
+     like scrolling. Vertical scrolling still passes through so the page
+     is never trapped over this section, and shift+wheel works too.
+     Mouse click-drag and touch drag keep working via drag="x". */
+  useEffect(() => {
+    const wrap = wrapRef.current;
+    if (!wrap) return;
+    const onWheel = (e: WheelEvent) => {
+      const range = maxXRef.current;
+      if (range <= 0) return;
+      let dx = e.deltaX;
+      let dy = e.deltaY;
+      // deltaMode 1 = lines, 2 = pages; normalize to pixels
+      if (e.deltaMode === 1) {
+        dx *= 16;
+        dy *= 16;
+      } else if (e.deltaMode === 2) {
+        dx *= wrap.clientWidth;
+        dy *= wrap.clientHeight;
+      }
+      // shift+wheel rotates the axes (classic horizontal nicety)
+      const h = e.shiftKey ? dy : dx;
+      const v = e.shiftKey ? 0 : dy;
+      // only hijack horizontal-dominant gestures
+      if (Math.abs(h) <= Math.abs(v)) return;
+      e.preventDefault();
+      x.stop();
+      const next = Math.max(-range, Math.min(0, x.get() - h));
+      x.set(next);
+      // settle to the nearest card once the gesture goes quiet
+      if (settleTimer.current) window.clearTimeout(settleTimer.current);
+      settleTimer.current = window.setTimeout(() => {
+        const s = stepRef.current;
+        const target = Math.max(-maxXRef.current, Math.min(0, Math.round(x.get() / s) * s));
+        animate(x, target, { type: "spring", stiffness: 260, damping: 32 });
+      }, 140);
+    };
+    wrap.addEventListener("wheel", onWheel, { passive: false });
+    return () => {
+      wrap.removeEventListener("wheel", onWheel);
+      if (settleTimer.current) window.clearTimeout(settleTimer.current);
+    };
+  }, [x]);
 
   /* Live index while dragging (for dots) */
   useEffect(() => {
@@ -204,7 +254,7 @@ export default function Experience() {
           {/* drag hint */}
           <p className="mb-5 flex items-center justify-center gap-2 text-xs font-medium uppercase tracking-[0.2em] text-muted">
             <MoveHorizontal size={14} className="text-accent" />
-            Drag to explore
+            Drag or scroll sideways to explore
           </p>
 
           {/* carousel */}

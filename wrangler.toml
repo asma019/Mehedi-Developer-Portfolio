@@ -4,7 +4,9 @@
 #
 # Dashboard variables to set: MAIL_FROM, MAIL_TO
 # (the EMAIL binding handles authentication — no API token needed).
-name = "mehedi-portfolio"
+# NOTE: the name must match the Worker's name in the Cloudflare dashboard
+# (the Git-connected build refuses to run otherwise).
+name = "mehedi-developer-portfolio"
 main = "worker/index.ts"
 compatibility_date = "2026-08-23"
 compatibility_flags = ["nodejs_compat"]
