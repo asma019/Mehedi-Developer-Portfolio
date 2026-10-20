@@ -132,7 +132,7 @@ function CtaCard() {
           clear scope and careful handoff.
         </p>
         <a
-          href="#contact"
+          href="/#contact"
           className="relative mt-1 inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-accent to-accent-2 px-7 py-3 text-[14.5px] font-semibold text-white shadow-[0_10px_32px_-6px_rgba(124,92,255,0.6)] transition-all duration-300 hover:shadow-[0_14px_44px_-6px_rgba(124,92,255,0.8)] active:scale-95"
         >
           Start a project

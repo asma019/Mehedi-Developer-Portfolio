@@ -35,7 +35,7 @@ export default function CaseStudy({ data }: { data: CaseData }) {
           <motion.a
             initial={{ opacity: 0, y: 8 }}
             animate={{ opacity: 1, y: 0 }}
-            href="#projects"
+            href="/#projects"
             className="inline-flex items-center gap-2 text-sm font-semibold text-muted transition-colors hover:text-accent"
           >
             <ArrowLeft size={16} /> All work
@@ -163,7 +163,7 @@ export default function CaseStudy({ data }: { data: CaseData }) {
           <div className="mt-16 flex flex-col items-center gap-4 pb-8 text-center">
             <p className="text-lg font-medium text-ink">Need a tool, platform or rescue like this?</p>
             <a
-              href="#contact"
+              href="/#contact"
               className="inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-accent to-accent-2 px-7 py-3.5 text-[15px] font-semibold text-white shadow-[0_12px_40px_-8px_rgba(124,92,255,0.65)] transition-transform hover:scale-[1.03] active:scale-95"
             >
               Get in touch

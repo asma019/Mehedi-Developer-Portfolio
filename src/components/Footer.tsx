@@ -4,6 +4,16 @@ import { contact, getEmail, navLinks, profile } from "../data/content";
 const email = getEmail();
 
 export default function Footer() {
+  /* On the blog/case pages, in-page anchors must lead back to the main
+     site first ("/#about"), or "#top" sticks to the blog URL forever. */
+  const isHome =
+    typeof window === "undefined" ||
+    ["/", "/index.html"].includes(
+      window.location.pathname.replace(/\/+$/, ""),
+    );
+  const hrefFor = (href: string) =>
+    !isHome && href.startsWith("#") ? `/${href}` : href;
+
   return (
     <footer className="relative overflow-hidden border-t border-line bg-alt">
       {/* top aurora glow */}
@@ -25,7 +35,7 @@ export default function Footer() {
         <div className="grid gap-12 md:grid-cols-[1.5fr_1fr_1fr_1.3fr]">
           {/* Brand */}
           <div>
-            <a href="#top" className="flex items-center gap-2.5">
+            <a href={hrefFor("#top")} className="flex items-center gap-2.5">
               <img
                 src="/favicon.svg"
                 alt=""
@@ -57,7 +67,7 @@ export default function Footer() {
               {navLinks.map((l) => (
                 <li key={l.href}>
                   <a
-                    href={l.href}
+                    href={hrefFor(l.href)}
                     className="text-[15px] text-muted transition-colors duration-200 hover:text-accent"
                   >
                     {l.label}

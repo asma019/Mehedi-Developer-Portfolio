@@ -145,7 +145,7 @@ export default function BlogPost({ post }: { post: Post }) {
         <div className="mt-16 border-t border-line pt-10 text-center">
           <p className="text-muted">Want this loop run on your site instead of reading about it?</p>
           <a
-            href="#contact"
+            href="/#contact"
             className="mt-5 inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-accent to-accent-2 px-7 py-3.5 text-[15px] font-semibold text-white shadow-[0_12px_40px_-8px_rgba(124,92,255,0.65)] transition-transform hover:scale-[1.03] active:scale-95"
           >
             Get in touch

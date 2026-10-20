@@ -6,6 +6,7 @@ import { join } from "node:path";
 import { SITE } from "./src/data/site";
 import { posts } from "./src/data/posts";
 import { cases } from "./src/data/cases";
+import { BLOG_HEAD_DESCRIPTION } from "./src/lib/head";
 
 /**
  * Fills the %SITE_*% placeholders in index.html from src/data/site.ts -
@@ -173,25 +174,163 @@ Available for freelance projects. Reach out through the website contact form at 
 `,
       );
 
+      /**
+       * Prerender the per-route <head> into each static copy of the app
+       * shell, so /blog, /blog/<slug> and /case/<slug> serve their own
+       * title/description/OG/canonical/JSON-LD even to crawlers that
+       * never execute JS. The client-side applyHead() produces the same
+       * values, so the two never disagree.
+       */
+      const esc = (s: string) =>
+        s.replace(/&/g, "&amp;").replace(/"/g, "&quot;").replace(/</g, "&lt;");
+
+      /** Rewrite the shell's static head tags for one route */
+      const withRouteHead = (
+        html: string,
+        r: {
+          title: string;
+          description: string;
+          canonical: string;
+          ogType?: string;
+          jsonLd?: Record<string, unknown>;
+        },
+      ) => {
+        let out = html
+          .replace(/<title>[\s\S]*?<\/title>/, `<title>${esc(r.title)}</title>`)
+          .replace(
+            /<meta name="description" content="[\s\S]*?"\s*\/?>/,
+            `<meta name="description" content="${esc(r.description)}" />`,
+          )
+          .replace(
+            /<meta property="og:title" content="[\s\S]*?"\s*\/?>/,
+            `<meta property="og:title" content="${esc(r.title)}" />`,
+          )
+          .replace(
+            /<meta property="og:description" content="[\s\S]*?"\s*\/?>/,
+            `<meta property="og:description" content="${esc(r.description)}" />`,
+          )
+          .replace(
+            /<meta property="og:url" content="[\s\S]*?"\s*\/?>/,
+            `<meta property="og:url" content="${esc(`${site}${r.canonical}`)}" />`,
+          )
+          .replace(
+            /<meta property="og:image:alt" content="[\s\S]*?"\s*\/?>/,
+            `<meta property="og:image:alt" content="${esc(r.title)}" />`,
+          )
+          .replace(
+            /<meta name="twitter:title" content="[\s\S]*?"\s*\/?>/,
+            `<meta name="twitter:title" content="${esc(r.title)}" />`,
+          )
+          .replace(
+            /<meta name="twitter:description" content="[\s\S]*?"\s*\/?>/,
+            `<meta name="twitter:description" content="${esc(r.description)}" />`,
+          )
+          .replace(
+            /<link rel="canonical" href="[\s\S]*?"\s*\/?>/,
+            `<link rel="canonical" href="${esc(`${site}${r.canonical}`)}" />`,
+          );
+        if (r.ogType) {
+          out = out.replace(
+            /<meta property="og:type" content="[\s\S]*?"\s*\/?>/,
+            `<meta property="og:type" content="${esc(r.ogType)}" />`,
+          );
+        }
+        if (r.jsonLd) {
+          // Same id the client-side applyHead() swaps in - seamless handoff.
+          out = out.replace(
+            "</head>",
+            `<script type="application/ld+json" id="route-jsonld">${JSON.stringify(
+              r.jsonLd,
+            )}</script></head>`,
+          );
+        }
+        return out;
+      };
+
       // 404.html - Netlify / Cloudflare Pages / Vercel serve this with a
       // real 404 status for unknown paths; the SPA inside renders the
       // styled NotFound view (App checks location.pathname).
-      // Real SPA views get their own copy with a proper 200: the app
-      // renders Blog / BlogPost when pathname is /blog or /blog/<slug>.
+      // Real SPA views get their own prerendered-head copy with a proper
+      // 200: the app renders Blog / BlogPost for /blog or /blog/<slug>.
       try {
-        const index = readFileSync(join(dist, "index.html"), "utf8");
+        // Vite only resolves %VITE_SITE_URL% when the env var is actually
+        // set on the build; resolve to the fallback domain otherwise.
+        const index = readFileSync(join(dist, "index.html"), "utf8").replaceAll(
+          "%VITE_SITE_URL%",
+          site,
+        );
+        writeFileSync(join(dist, "index.html"), index);
         writeFileSync(join(dist, "404.html"), index);
         mkdirSync(join(dist, "blog"), { recursive: true });
-        writeFileSync(join(dist, "blog", "index.html"), index);
+        writeFileSync(
+          join(dist, "blog", "index.html"),
+          withRouteHead(index, {
+            title: `Blog - ${SITE.name}`,
+            description: BLOG_HEAD_DESCRIPTION,
+            canonical: "/blog/",
+            jsonLd: {
+              "@context": "https://schema.org",
+              "@type": "Blog",
+              name: `${SITE.name} - Blog`,
+              url: `${site}/blog/`,
+              inLanguage: "en",
+            },
+          }),
+        );
         for (const p of posts) {
           mkdirSync(join(dist, "blog", p.slug), { recursive: true });
-          writeFileSync(join(dist, "blog", p.slug, "index.html"), index);
+          writeFileSync(
+            join(dist, "blog", p.slug, "index.html"),
+            withRouteHead(index, {
+              title: `${p.title} - ${SITE.name}`,
+              description: p.excerpt,
+              canonical: `/blog/${p.slug}/`,
+              ogType: "article",
+              jsonLd: {
+                "@context": "https://schema.org",
+                "@type": "BlogPosting",
+                headline: p.title,
+                description: p.excerpt,
+                datePublished: p.date,
+                dateModified: p.date,
+                inLanguage: "en",
+                mainEntityOfPage: {
+                  "@type": "WebPage",
+                  "@id": `${site}/blog/${p.slug}/`,
+                },
+                keywords: p.tags.join(", "),
+                isAccessibleForFree: true,
+                author: { "@type": "Person", name: SITE.name, url: site },
+              },
+            }),
+          );
         }
         for (const c of Object.values(cases)) {
           mkdirSync(join(dist, "case", c.slug), { recursive: true });
-          writeFileSync(join(dist, "case", c.slug, "index.html"), index);
+          writeFileSync(
+            join(dist, "case", c.slug, "index.html"),
+            withRouteHead(index, {
+              title: `${c.title} - ${SITE.name}`,
+              description: c.summary,
+              canonical: `/case/${c.slug}/`,
+              ogType: "article",
+              jsonLd: {
+                "@context": "https://schema.org",
+                "@type": "TechArticle",
+                headline: c.title,
+                description: c.summary,
+                datePublished: `${c.year}-01-01`,
+                inLanguage: "en",
+                mainEntityOfPage: {
+                  "@type": "WebPage",
+                  "@id": `${site}/case/${c.slug}/`,
+                },
+                author: { "@type": "Person", name: SITE.name, url: site },
+              },
+            }),
+          );
         }
-        console.log("404.html and blog/case index files generated");
+        console.log("404.html and prerendered blog/case pages generated");
       } catch {
         /* index.html missing - skip */
       }

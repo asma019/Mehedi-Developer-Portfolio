@@ -112,6 +112,19 @@ export default function App() {
     return () => window.removeEventListener("hashchange", onHash);
   }, []);
 
+  /* Full page loads that land directly on a section hash (e.g.
+     mehedims.com/#projects from the blog) can miss the browser's native
+     anchor scroll, because the section doesn't exist until React mounts.
+     One smooth scroll after mount covers that. */
+  useEffect(() => {
+    const h = window.location.hash;
+    if (!h || h.startsWith("#/")) return;
+    const t = window.setTimeout(() => {
+      document.getElementById(h.slice(1))?.scrollIntoView({ behavior: "smooth" });
+    }, 60);
+    return () => window.clearTimeout(t);
+  }, []);
+
   /* Content views: scroll to top, retitle, and apply per-route SEO
      metadata (description, canonical, OG, JSON-LD). Returning home with
      a section hash (e.g. from "All work" → #projects) scrolls to that

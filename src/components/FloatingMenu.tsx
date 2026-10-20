@@ -42,6 +42,20 @@ export default function FloatingMenu({
   const [open, setOpen] = useState(false);
   const [active, setActive] = useState("");
 
+  /* Cross-view navigation is always a full page load, so computing this
+     once at mount is safe. On the home page, section links and the logo
+     use in-page anchors; from the blog/case pages they must lead back to
+     "/" first so "#top" never sticks to a blog URL. */
+  const [isHome] = useState(
+    () =>
+      typeof document === "undefined" ||
+      ["/", "/index.html"].includes(
+        window.location.pathname.replace(/\/+$/, ""),
+      ),
+  );
+  const hrefFor = (href: string) =>
+    !isHome && href.startsWith("#") ? `/${href}` : href;
+
   const { scrollYProgress } = useScroll();
   const progress = useSpring(scrollYProgress, {
     stiffness: 120,
@@ -103,9 +117,9 @@ export default function FloatingMenu({
           }`}
           aria-label="Primary"
         >
-          {/* Monogram */}
+          {/* Monogram - always back to the main domain top */}
           <a
-            href="#top"
+            href={isHome ? "#top" : "/"}
             className="ml-1 flex items-center gap-2.5 rounded-full py-1 pl-1 pr-3"
             aria-label="Back to top"
           >
@@ -128,7 +142,7 @@ export default function FloatingMenu({
               return (
                 <a
                   key={l.href}
-                  href={l.href}
+                  href={hrefFor(l.href)}
                   className={`relative rounded-full px-3.5 py-2 text-[13.5px] font-medium transition-colors duration-200 ${
                     isActive ? "text-ink" : "text-muted hover:text-ink"
                   }`}
@@ -170,7 +184,7 @@ export default function FloatingMenu({
 
           {/* Hire me */}
           <a
-            href="#contact"
+            href={hrefFor("#contact")}
             className="mr-1 hidden rounded-full bg-gradient-to-r from-accent to-accent-2 px-4.5 py-2 text-[13.5px] font-semibold text-white shadow-[0_6px_22px_rgba(124,92,255,0.4)] transition-all duration-300 hover:shadow-[0_8px_30px_rgba(124,92,255,0.6)] active:scale-95 sm:inline-flex"
           >
             Hire me
@@ -215,7 +229,7 @@ export default function FloatingMenu({
                   return (
                     <motion.a
                       key={l.href}
-                      href={l.href}
+                      href={hrefFor(l.href)}
                       onClick={() => setOpen(false)}
                       initial={{ opacity: 0, x: -12 }}
                       animate={{ opacity: 1, x: 0 }}
@@ -241,7 +255,7 @@ export default function FloatingMenu({
                   );
                 })}
                 <a
-                  href="#contact"
+                  href={hrefFor("#contact")}
                   onClick={() => setOpen(false)}
                   className="mt-2 rounded-2xl bg-gradient-to-r from-accent to-accent-2 px-4 py-2.5 text-center text-[15px] font-semibold text-white"
                 >
