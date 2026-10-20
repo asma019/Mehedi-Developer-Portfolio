@@ -339,6 +339,7 @@ export const writing = {
   items: [
     {
       title: "WordPress performance audits",
+      slug: "wordpress-performance-audits",
       excerpt:
         "How I audit a slow WordPress site — and the caching, asset and server decisions that actually move the needle.",
     },

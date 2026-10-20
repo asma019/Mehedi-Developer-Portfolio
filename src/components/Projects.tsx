@@ -11,8 +11,10 @@ import {
   type LucideIcon,
 } from "lucide-react";
 import { projects } from "../data/content";
+import { hasCase } from "../data/cases";
 import { SectionShell, SectionHeading, Reveal, ShotCover, useSpotlight, staggerParent, staggerChild } from "./ui";
 import WorkModal from "./WorkModal";
+import { BookOpen } from "lucide-react";
 
 /* Cover icons + glow tints keyed by project name so order changes stay correct */
 const coverIcons: Record<string, LucideIcon> = {
@@ -111,6 +113,20 @@ function ProjectCard({
             </span>
           ))}
         </div>
+        {hasCase(project.name) && (
+          <button
+            onClick={(e) => {
+              e.preventDefault();
+              e.stopPropagation();
+              window.location.hash = `#/case/${hasCase(project.name)!.slug}`;
+            }}
+            className="mt-6 inline-flex items-center gap-2 text-[15px] font-semibold text-accent transition-colors hover:text-accent-2"
+          >
+            <BookOpen size={16} />
+            Read the case study
+            <ArrowUpRight size={15} className="transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+          </button>
+        )}
       </div>
     </motion.a>
   );

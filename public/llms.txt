@@ -1,6 +1,6 @@
 # Mehedi Hasan — Web Developer & Support Engineer
 
-> Mehedi Hasan builds fast, reliable websites from Khulna, Bangladesh — combining frontend craftsmanship with real WordPress, hosting, DNS and cloud-operations experience, so sites stay fast and dependable long after launch. 4+ years of experience, 15+ projects delivered for clients worldwide.
+> Fast, reliable websites built with React, Next.js and WordPress — backed by real VPS, hosting and cloud operations experience. 4+ years of experience, 15+ projects delivered for clients worldwide.
 
 Portfolio: https://mehedims.com/
 CV (PDF): https://mehedims.com/Mehedi-Hasan-CV.pdf

@@ -3,6 +3,25 @@ import react from "@vitejs/plugin-react";
 import tailwindcss from "@tailwindcss/vite";
 import { writeFileSync, mkdirSync, readFileSync } from "node:fs";
 import { join } from "node:path";
+import { SITE } from "./src/data/site";
+
+/**
+ * Fills the %SITE_*% placeholders in index.html from src/data/site.ts —
+ * the single source of truth for title/description, shared with llms.txt
+ * below, so HTML meta and generated files can't drift apart.
+ */
+function injectSiteMeta(): Plugin {
+  return {
+    name: "inject-site-meta",
+    transformIndexHtml(html) {
+      return html
+        .replaceAll("%SITE_TITLE%", SITE.title)
+        .replaceAll("%SITE_DESCRIPTION%", SITE.description)
+        .replaceAll("%SITE_TAGLINE%", SITE.tagline)
+        .replaceAll("%SITE_NAME%", SITE.name);
+    },
+  };
+}
 
 /**
  * Regenerates the domain-dependent SEO files (sitemap.xml, robots.txt,
@@ -73,9 +92,9 @@ Sitemap: ${site}/sitemap.xml
 
       writeFileSync(
         join(dist, "llms.txt"),
-        `# Mehedi Hasan — Web Developer & Support Engineer
+        `# ${SITE.title}
 
-> Mehedi Hasan builds fast, reliable websites from Khulna, Bangladesh — combining frontend craftsmanship with real WordPress, hosting, DNS and cloud-operations experience, so sites stay fast and dependable long after launch. 4+ years of experience, 15+ projects delivered for clients worldwide.
+> ${SITE.tagline} 4+ years of experience, 15+ projects delivered for clients worldwide.
 
 Portfolio: ${site}/
 CV (PDF): ${site}/Mehedi-Hasan-CV.pdf
@@ -136,7 +155,7 @@ Available for freelance projects. Reach out through the website contact form at 
 }
 
 export default defineConfig({
-  plugins: [react(), tailwindcss(), generateSeoFiles()],
+  plugins: [react(), tailwindcss(), injectSiteMeta(), generateSeoFiles()],
   server: {
     // Allow dev access via mehedims.com subdomains (e.g. working.mehedims.com)
     allowedHosts: [".mehedims.com"],
