@@ -14,13 +14,19 @@ import Footer from "./components/Footer";
 import NotFound from "./components/NotFound";
 import CaseStudy from "./components/CaseStudy";
 import BlogPost from "./components/PostView";
+import Blog from "./components/Blog";
 import { BackToTop, Cursor } from "./components/ui";
 import { getCase } from "./data/cases";
 import { getPost } from "./data/posts";
 import { SITE } from "./data/site";
 
-/** The site is a single page with hash navigation — any real pathname
- *  other than the root (or /index.html) is a 404. */
+/** The site is a single page with hash navigation - any real pathname
+ *  other than the root, /index.html or /blog is a 404. (/blog is served
+ *  as a static index file at build, see vite.config.ts.) */
+function isBlogPath(pathname: string) {
+  return pathname.replace(/\/+$/, "").toLowerCase() === "/blog";
+}
+
 function isHomePath(pathname: string) {
   const p = pathname.replace(/\/+$/, "");
   return p === "" || p === "/" || p === "/index.html";
@@ -28,15 +34,19 @@ function isHomePath(pathname: string) {
 
 type Route =
   | { view: "case"; slug: string }
-  | { view: "blog"; slug: string }
+  | { view: "post"; slug: string }
+  | { view: "blog" }
   | { view: "home"; hash: string };
 
-/** #/case/<slug> and #/blog/<slug> are content views; any other hash
- *  (#contact, empty) is an in-page anchor on the home page. */
+/** #/case/<slug> and #/blog/<slug> are content views, #/blog is the blog
+ *  index. The real /blog path (or #/blog from anywhere) opens the index.
+ *  Any other hash (#contact, empty) is an in-page anchor on the home page. */
 function parseHash(): Route {
   const raw = typeof window !== "undefined" ? window.location.hash : "";
+  const path = typeof window !== "undefined" ? window.location.pathname : "/";
   const m = raw.match(/^#\/(case|blog)\/([A-Za-z0-9-]+)/);
-  if (m) return { view: m[1] as "case" | "blog", slug: m[2] };
+  if (m) return m[1] === "case" ? { view: "case", slug: m[2] } : { view: "post", slug: m[2] };
+  if (raw === "#/blog" || isBlogPath(path)) return { view: "blog" };
   return { view: "home", hash: raw };
 }
 
@@ -87,14 +97,17 @@ export default function App() {
         );
       }
       document.title = SITE.title;
+    } else if (route.view === "blog") {
+      window.scrollTo({ top: 0 });
+      document.title = `Blog - ${SITE.name}`;
     } else {
       window.scrollTo({ top: 0 });
       const label =
         route.view === "case"
           ? getCase(route.slug)?.title
           : getPost(route.slug)?.title;
-      if (label) document.title = `${label} — ${SITE.name}`;
-      else document.title = "Not found — Mehedi Hasan";
+      if (label) document.title = `${label} - ${SITE.name}`;
+      else document.title = "Not found - Mehedi Hasan";
     }
     prevView.current = route.view;
   }, [route]);
@@ -117,6 +130,8 @@ export default function App() {
       <NotFound dark={!light} />
     );
   } else if (route.view === "blog") {
+    body = <Blog />;
+  } else if (route.view === "post") {
     const post = getPost(route.slug);
     body = post ? <BlogPost post={post} /> : <NotFound dark={!light} />;
   } else {

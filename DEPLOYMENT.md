@@ -4,7 +4,7 @@ The site is a Vite SPA that deploys to **Vercel, Netlify, Cloudflare
 (Pages/Workers), Render and Heroku** from the same GitHub repo. The
 contact form (`POST /api/contact`) works on every platform, and all SEO
 links (canonical, sitemap, robots.txt, llms.txt, structured data) follow
-the `VITE_SITE_URL` you set — one env var runs the site on any domain.
+the `VITE_SITE_URL` you set - one env var runs the site on any domain.
 
 ## Environment variables
 
@@ -13,19 +13,19 @@ platform's dashboard for deployments.
 
 | Variable | What it does |
 |---|---|
-| `VITE_SITE_URL` | Canonical domain, e.g. `https://mehedims.com` — used in ALL SEO files/meta at build time |
+| `VITE_SITE_URL` | Canonical domain, e.g. `https://mehedims.com` - used in ALL SEO files/meta at build time |
 | `SMTP_HOST` / `SMTP_PORT` / `SMTP_USER` / `SMTP_PASS` / `SMTP_SECURE` | SMTP server for the contact form (Vercel, Netlify, Render, Heroku) |
 | `MAIL_FROM` | From header, e.g. `"Portfolio Contact <you@example.com>"` |
 | `MAIL_TO` | Inbox that receives contact messages |
-| `RESEND_API_KEY` | Cloudflare only (Workers can't open SMTP sockets) — free tier at https://resend.com |
+| `RESEND_API_KEY` | Cloudflare only (Workers can't open SMTP sockets) - free tier at https://resend.com |
 | `PORT` | Used by `node server.js` (Render/Heroku set it automatically) |
 
 ### SMTP examples
-- **Gmail** — `SMTP_HOST=smtp.gmail.com`, `SMTP_PORT=587`,
+- **Gmail** - `SMTP_HOST=smtp.gmail.com`, `SMTP_PORT=587`,
   `SMTP_SECURE=false`, `SMTP_PASS` = an App Password
   (create at https://myaccount.google.com/apppasswords)
-- **Zoho** — `smtp.zoho.com`, port `465`, `SMTP_SECURE=true`
-- **Brevo / SendGrid / Mailgun** — use the SMTP credentials from their dashboards
+- **Zoho** - `smtp.zoho.com`, port `465`, `SMTP_SECURE=true`
+- **Brevo / SendGrid / Mailgun** - use the SMTP credentials from their dashboards
 
 ---
 
@@ -53,12 +53,12 @@ platform's dashboard for deployments.
    (the default). `wrangler.toml` + `worker/index.ts` handle everything:
    static assets from `dist/`, styled 404 page, and `/api/contact`.
 3. Settings → Variables and Secrets: set `VITE_SITE_URL`, `MAIL_FROM`,
-   `MAIL_TO` and **`RESEND_API_KEY`** (Workers cannot use raw SMTP — the
+   `MAIL_TO` and **`RESEND_API_KEY`** (Workers cannot use raw SMTP - the
    form sends through Resend's HTTP API; free tier works).
 4. CLI alternative: `npx wrangler deploy`.
 
 > Note: if you previously created a **Pages** project with the same name,
-> delete it first — this repo now deploys as a Worker with static assets.
+> delete it first - this repo now deploys as a Worker with static assets.
 
 ## Render
 
@@ -72,7 +72,7 @@ platform's dashboard for deployments.
 
 1. `heroku create your-app-name`
 2. `heroku config:set VITE_SITE_URL=https://your-app.herokuapp.com SMTP_HOST=... SMTP_PORT=587 SMTP_USER=... SMTP_PASS=... MAIL_TO=...`
-3. `git push heroku main` — the `Procfile` starts `node server.js`.
+3. `git push heroku main` - the `Procfile` starts `node server.js`.
 
 ---
 
@@ -87,7 +87,7 @@ curl -X POST http://localhost:3000/api/contact \
 ```
 
 With placeholder SMTP values in `.env` the endpoint answers
-`{"ok":false,"error":"Message could not be sent right now..."}` — that
+`{"ok":false,"error":"Message could not be sent right now..."}` - that
 proves the wiring; fill real SMTP credentials to receive the email.
 
 ## Rebuilding SEO for a new domain

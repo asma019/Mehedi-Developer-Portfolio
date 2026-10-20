@@ -1,5 +1,5 @@
 /**
- * Netlify function (v2, web-standard) — exposed as /api/contact
+ * Netlify function (v2, web-standard) - exposed as /api/contact
  * (see the redirect in netlify.toml). Sends via SMTP (nodemailer).
  * Set SMTP_* / MAIL_* env vars in Netlify → Site settings → Environment variables.
  */

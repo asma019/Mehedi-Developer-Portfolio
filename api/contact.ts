@@ -1,5 +1,5 @@
 /**
- * Vercel serverless function — POST /api/contact
+ * Vercel serverless function - POST /api/contact
  * Web-standard Request/Response; sends via SMTP (nodemailer).
  * Set SMTP_* / MAIL_* env vars in Vercel → Project → Settings → Environment Variables.
  */

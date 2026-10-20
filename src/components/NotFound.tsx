@@ -3,7 +3,7 @@ import { motion, useReducedMotion, type Variants } from "motion/react";
 import { ArrowLeft, Compass } from "lucide-react";
 import { Magnetic } from "./ui";
 
-/* Three.js is heavy — load the scene as its own chunk after first paint. */
+/* Three.js is heavy - load the scene as its own chunk after first paint. */
 const HeroScene = lazy(() => import("./three/HeroScene"));
 
 const easeOut = [0.22, 1, 0.36, 1] as const;
@@ -43,7 +43,7 @@ export default function NotFound({ dark }: { dark: boolean }) {
       ref={ref}
       className="noise relative flex min-h-[100svh] flex-col items-center justify-center overflow-hidden bg-bg px-5"
     >
-      {/* Three.js wave scene — same engine as the hero, logos off */}
+      {/* Three.js wave scene - same engine as the hero, logos off */}
       <div className="absolute inset-0" aria-hidden>
         <Suspense fallback={null}>
           <HeroScene dark={dark} active={inView && !reduced} reduced={!!reduced} logos={false} />
@@ -101,7 +101,7 @@ export default function NotFound({ dark }: { dark: boolean }) {
           className="mx-auto mt-5 max-w-md text-base leading-relaxed text-muted sm:text-lg"
         >
           The link may be broken, or the page may have moved. The particles
-          are still here though — and so is the rest of the site.
+          are still here though - and so is the rest of the site.
         </motion.p>
 
         <motion.div

@@ -6,7 +6,7 @@ import { SectionShell, SectionHeading, Reveal } from "./ui";
 
 const GAP = 24;
 
-/* Real brand logos when available — falls back to the monogram medallion.
+/* Real brand logos when available - falls back to the monogram medallion.
    Drop new files into public/logos/ and add them here. */
 const roleLogos: Record<string, string> = {
   "Zorn Ventures Limited": "/logos/zorn-ventures.png",
@@ -128,7 +128,7 @@ function CtaCard() {
           <span className="text-gradient block">be next.</span>
         </h3>
         <p className="relative max-w-xs text-[15px] leading-relaxed text-muted">
-          Fast WordPress builds, full-stack apps, VPS tuning — delivered with
+          Fast WordPress builds, full-stack apps, VPS tuning - delivered with
           clear scope and careful handoff.
         </p>
         <a

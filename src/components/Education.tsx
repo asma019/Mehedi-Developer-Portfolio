@@ -15,7 +15,7 @@ export default function Education() {
         viewport={{ once: true, margin: "-60px" }}
         className="mt-16 grid gap-6 lg:grid-cols-3"
       >
-        {/* Degree — diploma frame: solid outer border, dashed inner border,
+        {/* Degree - diploma frame: solid outer border, dashed inner border,
             circular badge breaking the top edge */}
         <motion.div variants={staggerChild} className="lg:col-span-2">
           <div className="card card-hover relative h-full rounded-3xl p-2">
@@ -53,7 +53,7 @@ export default function Education() {
         </motion.div>
 
         <div className="flex flex-col gap-6">
-          {/* Certification — seal style */}
+          {/* Certification - seal style */}
           <motion.div variants={staggerChild} className="flex-1">
             <div className="card card-hover h-full rounded-3xl p-8">
               <div className="flex items-center gap-4">

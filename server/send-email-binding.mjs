@@ -1,6 +1,6 @@
 /**
  * Sends the contact email via Cloudflare's Email Sending Worker binding.
- * No API token required — the binding is configured in wrangler.toml
+ * No API token required - the binding is configured in wrangler.toml
  * under [[send_email]] and exposed to the worker as env.EMAIL.
  *
  * This replaces send-resend.mjs when the native Cloudflare Email binding
@@ -9,11 +9,11 @@
 
 /**
  * @param {{ name: string, email: string, message: string }} m
- * @param {object} emailBinding — env.EMAIL (the send_email binding)
+ * @param {object} emailBinding - env.EMAIL (the send_email binding)
  */
 export async function sendViaEmailBinding({ name, email, message }, emailBinding) {
   if (!emailBinding) {
-    throw new Error("EMAIL binding is not configured — add [[send_email]] to wrangler.toml");
+    throw new Error("EMAIL binding is not configured - add [[send_email]] to wrangler.toml");
   }
 
   const response = await emailBinding.send({
@@ -30,7 +30,7 @@ export async function sendViaEmailBinding({ name, email, message }, emailBinding
   });
 
   if (!response || !response.messageId) {
-    throw new Error("Email sending failed — no messageId returned");
+    throw new Error("Email sending failed - no messageId returned");
   }
 
   return response;

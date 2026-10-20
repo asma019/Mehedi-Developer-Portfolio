@@ -1,5 +1,5 @@
 /**
- * Cloudflare Worker entry — serves the static site from dist/ (assets
+ * Cloudflare Worker entry - serves the static site from dist/ (assets
  * binding) and handles POST /api/contact via the Cloudflare Email
  * Sending Worker binding (no external API token required).
  *

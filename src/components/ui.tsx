@@ -76,7 +76,7 @@ export function SectionShell({
       id={id}
       className={`relative scroll-mt-24 py-24 sm:py-32 ${alternate ? "bg-alt" : "bg-bg"} ${className}`}
     >
-      {/* ambient depth: aurora orbs (+ optional dot grid) — clipped so the
+      {/* ambient depth: aurora orbs (+ optional dot grid) - clipped so the
           negative-offset orbs never push the page wider on mobile */}
       <div className="pointer-events-none absolute inset-0 overflow-hidden" aria-hidden>
         <div
@@ -251,7 +251,7 @@ export function Magnetic({
 }
 
 /* ── Cursor accent ring (fine pointers only) ─────────────────
-   The user's native cursor is never hidden — a soft ring simply
+   The user's native cursor is never hidden - a soft ring simply
    trails it and expands over interactive elements. */
 
 export function Cursor() {
@@ -288,7 +288,7 @@ export function Cursor() {
 
   if (!enabled) return null;
 
-  /* trailing accent ring — complements the native cursor */
+  /* trailing accent ring - complements the native cursor */
   return (
     <motion.div
       style={{ x: ringX, y: ringY, opacity: visible ? 1 : 0 }}

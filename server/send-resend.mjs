@@ -24,7 +24,7 @@ export async function sendViaResend({ name, email, message }) {
       to: [MAIL_TO || "hello@mehedims.com"],
       reply_to: email,
       subject: `Portfolio contact from ${name}`,
-      text: `${message}\n\n— ${name} (${email})`,
+      text: `${message}\n\n- ${name} (${email})`,
     }),
   });
 

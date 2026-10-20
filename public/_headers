@@ -6,11 +6,11 @@
   X-Frame-Options: DENY
   Referrer-Policy: strict-origin-when-cross-origin
 
-# Hashed build output — never changes once deployed
+# Hashed build output - never changes once deployed
 /assets/*
   Cache-Control: public, max-age=31536000, immutable
 
-# Project screenshots almost never change — cache them for a year
+# Project screenshots almost never change - cache them for a year
 /screens/*
   Cache-Control: public, max-age=31536000, immutable
 

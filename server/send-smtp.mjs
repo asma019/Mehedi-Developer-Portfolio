@@ -37,7 +37,7 @@ export async function sendViaSmtp({ name, email, message }) {
   });
 
   const subject = `Portfolio contact from ${name}`;
-  const text = `${message}\n\n— ${name} (${email})`;
+  const text = `${message}\n\n- ${name} (${email})`;
   const html = `
     <div style="font-family:system-ui,-apple-system,sans-serif;max-width:560px">
       <h2 style="margin:0 0 12px">New portfolio message</h2>

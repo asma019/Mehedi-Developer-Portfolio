@@ -120,6 +120,11 @@ const server = http.createServer(async (req, res) => {
       return serveFile(res, join(DIST, "index.html"), "no-cache");
     }
 
+    // /blog is a real SPA view (static file generated at build)
+    if (path.replace(/\/+$/, "") === "/blog") {
+      return serveFile(res, join(DIST, "index.html"), "no-cache");
+    }
+
     // Unknown paths get the styled 404 page with a real 404 status
     // (the SPA inside renders the NotFound view via pathname check).
     return serveFile(res, join(DIST, "404.html"), "no-cache", 404);

@@ -193,7 +193,7 @@ export default function WorkModal({ open, onClose }: { open: boolean; onClose: (
               </button>
             </div>
 
-            {/* filters — underline tabs */}
+            {/* filters - underline tabs */}
             <div className="mt-4 flex gap-1 overflow-x-auto">
               {categories.map((c) => {
                 const isActive = filter === c;
@@ -308,7 +308,7 @@ export default function WorkModal({ open, onClose }: { open: boolean; onClose: (
                 })}
               </div>
 
-              {/* preview panel — desktop */}
+              {/* preview panel - desktop */}
               <div className="hidden overflow-y-auto p-8 lg:block xl:p-12">
                 <AnimatePresence mode="wait">
                   <motion.div

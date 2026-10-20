@@ -1,5 +1,5 @@
 /**
- * Generates public/Mehedi-Hasan-CV.pdf — a clean one-page CV rendered
+ * Generates public/Mehedi-Hasan-CV.pdf - a clean one-page CV rendered
  * directly to PDF bytes (no dependencies). Rerun after editing content:
  *   node scripts/generate-cv.mjs
  */
@@ -23,13 +23,13 @@ const cv = {
     {
       company: "Zorn Ventures Limited",
       role: "Technical Support Engineer",
-      period: "May 2026 — Present",
+      period: "May 2026 - Present",
       summary:
-        "Supporting the SatisfyHost and BengalCloud brands — helping customers resolve hosting and cloud-service issues through clear, dependable technical guidance.",
+        "Supporting the SatisfyHost and BengalCloud brands - helping customers resolve hosting and cloud-service issues through clear, dependable technical guidance.",
       points: [
         "Hosting & cloud troubleshooting across VPS, cPanel and custom PowerDNS infrastructure",
         "Built and operate a redundant PowerDNS cluster for the SatisfyHost and BengalCloud brands",
-        "Developed WHMCS modules — PowerDNS PTR & DNS managers and easy product transfer",
+        "Developed WHMCS modules - PowerDNS PTR & DNS managers and easy product transfer",
         "Clear, reproducible communication that turns tickets into solutions",
       ],
     },
@@ -49,22 +49,22 @@ const cv = {
     {
       company: "Independent · Upwork & Fiverr",
       role: "Freelance Web Developer",
-      period: "2021 — Present",
+      period: "2021 - Present",
       summary:
         "Delivering responsive websites, custom interfaces and technical improvements for remote clients worldwide.",
       points: [
         "15+ full-stack web applications and sites using Next.js, Laravel and React",
         "Architected a comprehensive academic ERP with Python and MySQL",
         "Specialised in WordPress speed optimisation and robust VPS management",
-        "Launched my own products end to end — from Tools.BD network utilities to Laravel SaaS platforms",
+        "Launched my own products end to end - from Tools.BD network utilities to Laravel SaaS platforms",
       ],
     },
   ],
   education: {
-    degree: "Diploma in Engineering — Computer Science Technology",
+    degree: "Diploma in Engineering - Computer Science Technology",
     school: "Mangrove Institute of Science and Technology",
-    period: "2023 — 2027 (expected)",
-    cert: "NSDA — Web Design and Development for Freelancing, Level 3 (result published December 2025)",
+    period: "2023 - 2027 (expected)",
+    cert: "NSDA - Web Design and Development for Freelancing, Level 3 (result published December 2025)",
   },
   skills: [
     ["Frontend", "React, Next.js, TypeScript, Tailwind CSS, UI Systems, API Integration"],
@@ -73,7 +73,7 @@ const cv = {
     ["Hosting & Servers", "NGINX, Caddy, PowerDNS, VPS Setup, Ubuntu/AlmaLinux/Debian, cPanel, CloudPanel, WHMCS, AWS/Azure/DigitalOcean/Linode"],
     ["Performance & Growth", "Web Performance, Core Web Vitals, SEO, Technical Support"],
   ],
-  languages: "Bengali — Native proficiency · English — Professional working proficiency",
+  languages: "Bengali - Native proficiency · English - Professional working proficiency",
 };
 
 /* ── Minimal PDF writer ─────────────────────────────────────── */
@@ -159,7 +159,7 @@ for (const l of wrap(cv.profile, 9.5, W - 2 * M)) {
 /* Experience */
 section("Experience");
 for (const job of cv.experience) {
-  text(`${job.company}  —  ${job.role}`, M, y, 10.5, dark, "F2");
+  text(`${job.company}  -  ${job.role}`, M, y, 10.5, dark, "F2");
   const pw = textWidth(job.period, 8.5);
   text(job.period, W - M - pw, y + 0.5, 8.5, gray, "F3");
   y -= 13;

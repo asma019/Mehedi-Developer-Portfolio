@@ -1,4 +1,4 @@
-# robots.txt — mehedims.com
+# robots.txt - mehedims.com
 
 User-agent: *
 Allow: /

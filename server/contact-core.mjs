@@ -1,5 +1,5 @@
 /**
- * Shared contact-form logic — platform agnostic (web-standard
+ * Shared contact-form logic - platform agnostic (web-standard
  * Request/Response). Used by the Vercel, Netlify, Cloudflare and
  * Node-server handlers.
  */
@@ -39,7 +39,7 @@ export async function handleContact(request, sendMail, opts = {}) {
 
   const ip = opts.ip || "unknown";
   if (rateLimited(ip)) {
-    return json({ ok: false, error: "Too many messages — please try again later." }, 429);
+    return json({ ok: false, error: "Too many messages - please try again later." }, 429);
   }
 
   let body;

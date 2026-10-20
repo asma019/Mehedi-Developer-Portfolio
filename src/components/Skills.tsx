@@ -12,10 +12,10 @@ import { SectionShell, SectionHeading, staggerParent, staggerChild } from "./ui"
 
 const icons = [MonitorSmartphone, Database, LayoutTemplate, Server, GaugeCircle, Compass];
 
-/* Per-card accent hues — violet, cyan, blue, green, orange, pink */
+/* Per-card accent hues - violet, cyan, blue, green, orange, pink */
 const accents = ["#8b5cf6", "#22d3ee", "#3b82f6", "#34d399", "#fb923c", "#f472b6"];
 
-/* Bento spans — every row pairs one wide + one regular card, so the
+/* Bento spans - every row pairs one wide + one regular card, so the
    chip-heavy Hosting & Servers card flows sideways instead of towering
    over its row-mates:
    row 1: Frontend (wide) + Backend · row 2: WordPress + Hosting (wide)
@@ -46,7 +46,7 @@ export default function Skills() {
           const accent = accents[i % accents.length];
           return (
             <motion.div key={group.title} variants={staggerChild} className={spans[i]}>
-              {/* HUD panel — corner brackets light up on hover */}
+              {/* HUD panel - corner brackets light up on hover */}
               <div
                 className="hud card-hover group relative h-full rounded-2xl border border-line bg-surface/70 p-7 backdrop-blur-sm transition-colors duration-300 hover:border-accent/35"
               >

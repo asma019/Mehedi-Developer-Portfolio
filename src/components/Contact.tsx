@@ -76,7 +76,7 @@ export default function Contact() {
       }
     } catch {
       setStatus("error");
-      setServerError("Network error — the server could not be reached.");
+      setServerError("Network error - the server could not be reached.");
     }
   };
 
@@ -222,11 +222,11 @@ export default function Contact() {
               Send a message
             </h3>
             <p className="mt-1.5 text-sm text-muted">
-              Goes straight to my inbox — no email app needed.
+              Goes straight to my inbox - no email app needed.
             </p>
 
             <form onSubmit={submit} noValidate className="mt-7 space-y-5">
-              {/* honeypot — invisible to humans, catnip for spam bots */}
+              {/* honeypot - invisible to humans, catnip for spam bots */}
               <input
                 type="text"
                 name="website"
@@ -327,7 +327,7 @@ export default function Contact() {
                       className="flex items-center gap-1.5 text-[13px] text-accent"
                     >
                       <Check size={14} />
-                      Message sent — I&apos;ll get back to you soon.
+                      Message sent - I&apos;ll get back to you soon.
                     </motion.p>
                   )}
                   {status === "error" && (

@@ -10,7 +10,7 @@ import { ArrowRight } from "lucide-react";
 import { hero, profile } from "../data/content";
 import { Magnetic } from "./ui";
 
-/* Three.js is heavy — load the scene as its own chunk after first paint. */
+/* Three.js is heavy - load the scene as its own chunk after first paint. */
 const HeroScene = lazy(() => import("./three/HeroScene"));
 
 const easeOut = [0.22, 1, 0.36, 1] as const;

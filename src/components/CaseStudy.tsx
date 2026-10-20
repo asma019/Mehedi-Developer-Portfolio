@@ -92,7 +92,7 @@ export default function CaseStudy({ data }: { data: CaseData }) {
         </div>
       </section>
 
-      {/* ── Verified numbers row — hidden while `metrics` is empty ── */}
+      {/* ── Verified numbers row - hidden while `metrics` is empty ── */}
       {data.metrics.length > 0 && (
         <section className="py-16 sm:py-20">
           <div className="mx-auto grid w-full max-w-6xl gap-6 px-5 sm:grid-cols-3 sm:px-8">

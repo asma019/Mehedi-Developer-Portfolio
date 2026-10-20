@@ -6,7 +6,7 @@ import { join } from "node:path";
 import { SITE } from "./src/data/site";
 
 /**
- * Fills the %SITE_*% placeholders in index.html from src/data/site.ts —
+ * Fills the %SITE_*% placeholders in index.html from src/data/site.ts -
  * the single source of truth for title/description, shared with llms.txt
  * below, so HTML meta and generated files can't drift apart.
  */
@@ -26,7 +26,7 @@ function injectSiteMeta(): Plugin {
 /**
  * Regenerates the domain-dependent SEO files (sitemap.xml, robots.txt,
  * llms.txt) into dist/ at the end of every build, using VITE_SITE_URL
- * from the environment — so any domain set in .env (or the platform's
+ * from the environment - so any domain set in .env (or the platform's
  * env vars) propagates everywhere with one rebuild.
  */
 function generateSeoFiles(): Plugin {
@@ -50,13 +50,19 @@ function generateSeoFiles(): Plugin {
     <changefreq>monthly</changefreq>
     <priority>1.0</priority>
   </url>
+  <url>
+    <loc>${site}/blog/</loc>
+    <lastmod>${today}</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
 </urlset>
 `,
       );
 
       writeFileSync(
         join(dist, "robots.txt"),
-        `# robots.txt — ${site.replace("https://", "")}
+        `# robots.txt - ${site.replace("https://", "")}
 
 User-agent: *
 Allow: /
@@ -97,33 +103,34 @@ Sitemap: ${site}/sitemap.xml
 > ${SITE.tagline} 4+ years of experience, 15+ projects delivered for clients worldwide.
 
 Portfolio: ${site}/
+Blog: ${site}/blog/
 CV (PDF): ${site}/Mehedi-Hasan-CV.pdf
 
 ## Services
 
-- Full-stack web development — React, Next.js, Go, PHP/Laravel, Python, MySQL, PostgreSQL, Redis
-- WordPress performance — audits, LiteSpeed caching, Core Web Vitals wins
-- Hosting & server operations — NGINX, Caddy, VPS setup (Ubuntu/AlmaLinux/Debian), cPanel, CloudPanel
-- DNS infrastructure — PowerDNS clusters, PTR/rDNS management, WHMCS integrations
-- Technical support — hosting & cloud troubleshooting with clear, reproducible communication
+- Full-stack web development - React, Next.js, Go, PHP/Laravel, Python, MySQL, PostgreSQL, Redis
+- WordPress performance - audits, LiteSpeed caching, Core Web Vitals wins
+- Hosting & server operations - NGINX, Caddy, VPS setup (Ubuntu/AlmaLinux/Debian), cPanel, CloudPanel
+- DNS infrastructure - PowerDNS clusters, PTR/rDNS management, WHMCS integrations
+- Technical support - hosting & cloud troubleshooting with clear, reproducible communication
 
 ## Projects
 
-- [Tools.BD](https://tools.bd/) — free network & domain tools: DNS, WHOIS, email-security analysis, ASN/IP/prefix lookup. Built with Go, PostgreSQL, Redis, SSE, Caddy.
-- [AsiaBio Link](https://asiabio.link/) — URL shortener for developers and marketers, built in Laravel.
-- [BuyAPet UK](https://buyapet.co.uk/) — UK pet classifieds marketplace; theme updates and speed optimization.
-- [CodeXSell](https://codexsell.com/) — GPL digital-products marketplace (1800+ themes/plugins, memberships, admin panel), full Laravel build.
-- [Zeely Realty](https://zeelyrealty.com/) — real-estate buy/rent broker platform, full Laravel system.
-- [Diploma ICU](https://diploma.icu/) — blog and resources for Bangladeshi students; custom WordPress theme and content.
-- [Saajkonna](https://saajkonna.com/) — WooCommerce beauty e-commerce, end-to-end speed optimization.
-- PowerDNS Cluster — redundant DNS infrastructure with API for hosting brands.
-- WHMCS modules — PowerDNS PTR Manager, PowerDNS DNS Manager, and Easy Product Transfer.
+- [Tools.BD](https://tools.bd/) - free network & domain tools: DNS, WHOIS, email-security analysis, ASN/IP/prefix lookup. Built with Go, PostgreSQL, Redis, SSE, Caddy.
+- [AsiaBio Link](https://asiabio.link/) - URL shortener for developers and marketers, built in Laravel.
+- [BuyAPet UK](https://buyapet.co.uk/) - UK pet classifieds marketplace; theme updates and speed optimization.
+- [CodeXSell](https://codexsell.com/) - GPL digital-products marketplace (1800+ themes/plugins, memberships, admin panel), full Laravel build.
+- [Zeely Realty](https://zeelyrealty.com/) - real-estate buy/rent broker platform, full Laravel system.
+- [Diploma ICU](https://diploma.icu/) - blog and resources for Bangladeshi students; custom WordPress theme and content.
+- [Saajkonna](https://saajkonna.com/) - WooCommerce beauty e-commerce, end-to-end speed optimization.
+- PowerDNS Cluster - redundant DNS infrastructure with API for hosting brands.
+- WHMCS modules - PowerDNS PTR Manager, PowerDNS DNS Manager, and Easy Product Transfer.
 
 ## Experience
 
-- Technical Support Engineer — Zorn Ventures Limited (SatisfyHost & BengalCloud brands), 2026–present
-- Chief Information Officer — TechZ IT, 2025
-- Freelance Web Developer — Upwork & Fiverr, 2021–present
+- Technical Support Engineer - Zorn Ventures Limited (SatisfyHost & BengalCloud brands), 2026-present
+- Chief Information Officer - TechZ IT, 2025
+- Freelance Web Developer - Upwork & Fiverr, 2021-present
 
 ## Profiles
 
@@ -138,15 +145,19 @@ Available for freelance projects. Reach out through the website contact form at 
 `,
       );
 
-      // 404.html — Netlify / Cloudflare Pages / Vercel serve this with a
+      // 404.html - Netlify / Cloudflare Pages / Vercel serve this with a
       // real 404 status for unknown paths; the SPA inside renders the
       // styled NotFound view (App checks location.pathname).
+      // blog/index.html does the same for /blog, but with a real 200:
+      // the app renders the Blog index when pathname is /blog.
       try {
         const index = readFileSync(join(dist, "index.html"), "utf8");
         writeFileSync(join(dist, "404.html"), index);
-        console.log("404.html generated");
+        mkdirSync(join(dist, "blog"), { recursive: true });
+        writeFileSync(join(dist, "blog", "index.html"), index);
+        console.log("404.html and blog/index.html generated");
       } catch {
-        /* index.html missing — skip */
+        /* index.html missing - skip */
       }
 
       console.log(`SEO files generated for ${site}`);

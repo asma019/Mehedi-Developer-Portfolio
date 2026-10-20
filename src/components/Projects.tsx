@@ -59,7 +59,7 @@ function ProjectCard({
         featured ? "grid md:grid-cols-[1.05fr_1fr]" : ""
       }`}
     >
-      {/* cover — real screenshot with gradient fallback */}
+      {/* cover - real screenshot with gradient fallback */}
       <ShotCover
         shot={project.shot}
         gradient={project.gradient}

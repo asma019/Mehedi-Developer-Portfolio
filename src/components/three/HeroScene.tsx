@@ -136,14 +136,14 @@ function makeLogoTexture(def: LogoDef, dark: boolean): THREE.CanvasTexture {
   const ctx = canvas.getContext("2d")!;
 
   const path = new Path2D(def.path);
-  // simple-icons use a 24×24 viewBox — scale to ~64% of the card with padding
+  // simple-icons use a 24×24 viewBox - scale to ~64% of the card with padding
   const fill = size * 0.64;
   const s = fill / 24;
   const off = (size - fill) / 2;
   ctx.translate(off, off);
   ctx.scale(s, s);
 
-  // Next.js ships a white mark — flip to black so it reads on light cards
+  // Next.js ships a white mark - flip to black so it reads on light cards
   let color = def.color;
   if (color === "#ffffff" && !dark) color = "#0a0a0f";
 
@@ -212,7 +212,7 @@ function LogoBadge({
   );
 }
 
-/* Left / right columns flanking the headline — pushed wide of the text
+/* Left / right columns flanking the headline - pushed wide of the text
    column, staggered vertically to "ladder" alongside it. On narrow
    (mobile) screens they sit off-screen, leaving the hero clean. */
 const badgeLayout: { idx: number; position: [number, number, number]; size: number; speed: number }[] = [

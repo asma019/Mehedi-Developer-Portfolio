@@ -100,7 +100,7 @@ export default function About() {
             </Reveal>
           ))}
 
-          {/* facts — hairline definition list, no cards */}
+          {/* facts - hairline definition list, no cards */}
           <motion.ul
             variants={staggerParent}
             initial="hidden"
@@ -140,7 +140,7 @@ export default function About() {
         </Reveal>
       </div>
 
-      {/* stats — single divided strip */}
+      {/* stats - single divided strip */}
       <Reveal delay={0.15}>
         <div className="mt-16 grid grid-cols-1 divide-y divide-line rounded-[2rem] border border-line bg-surface/50 backdrop-blur-sm sm:grid-cols-3 sm:divide-x sm:divide-y-0">
           {about.stats.map((s) => (
@@ -156,7 +156,7 @@ export default function About() {
 
       <Reveal delay={0.2}>
         <p className="mt-8 text-center text-[13px] text-muted">
-          Remote-first — collaborating with clients across time zones, from
+          Remote-first - collaborating with clients across time zones, from
           Bangladesh to the UK and beyond.
         </p>
       </Reveal>

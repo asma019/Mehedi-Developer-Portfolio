@@ -1,8 +1,8 @@
-# Mehedi — Developer Portfolio 🚀
+# Mehedi - Developer Portfolio 🚀
 
 A modern, open-source developer portfolio with an interactive **Three.js hero**,
 a premium **floating glass menu**, unique per-section designs, a real **SMTP
-contact form**, full **SEO + AI-ready** metadata — deployable to **Vercel,
+contact form**, full **SEO + AI-ready** metadata - deployable to **Vercel,
 Netlify, Cloudflare, Render and Heroku** from a single repo.
 
 <p align="center">
@@ -30,37 +30,37 @@ Click to expand the complete page, top to bottom:
 <details>
 <summary><b>▶ Show full page (all sections)</b></summary>
 
-![Full page preview — every section of the portfolio](docs/fullpage.jpg)
+![Full page preview - every section of the portfolio](docs/fullpage.jpg)
 
 </details>
 
 ## ✨ Features
 
-- 🌌 **Interactive Three.js hero** — a particle wave field that ripples around
+- 🌌 **Interactive Three.js hero** - a particle wave field that ripples around
   the cursor, with floating 3D badges showing real tech logos (React,
   JavaScript, Next.js, Python, PHP, Node.js)
-- 🧭 **Premium floating menu** — frosted-glass pill with a sliding active-section
+- 🧭 **Premium floating menu** - frosted-glass pill with a sliding active-section
   indicator (scroll-spy) and a mobile glass sheet
-- 🎨 **Dark-first "Obsidian Aurora" design** with a polished light mode — one
+- 🎨 **Dark-first "Obsidian Aurora" design** with a polished light mode - one
   toggle, remembered
-- 🧩 **Every section has its own style** — editorial About, HUD-bracket Skills
+- 🧩 **Every section has its own style** - editorial About, HUD-bracket Skills
   bento, case-study Projects with real website screenshots, a **draggable
   experience carousel**, certificate-style Education, index-list Writing
-- 🗂️ **"All work" browser** — full-screen popup with filter chips and a
+- 🗂️ **"All work" browser** - full-screen popup with filter chips and a
   list + large-preview layout
-- 📧 **Working contact form** — serverless SMTP email with honeypot spam
+- 📧 **Working contact form** - serverless SMTP email with honeypot spam
   trap, rate limiting, and inline success/error states (no mailto app)
-- 🤖 **Email bot-protection** — the address is assembled at runtime, never
+- 🤖 **Email bot-protection** - the address is assembled at runtime, never
   present in the HTML or JS bundle
-- 🔍 **Full SEO** — Open Graph + Twitter cards, JSON-LD Person/WebSite schema,
+- 🔍 **Full SEO** - Open Graph + Twitter cards, JSON-LD Person/WebSite schema,
   canonical, sitemap.xml, robots.txt, generated OG share image
-- 🤖 **AI-ready** — `llms.txt` for LLM crawlers, AI bots explicitly welcomed in
+- 🤖 **AI-ready** - `llms.txt` for LLM crawlers, AI bots explicitly welcomed in
   robots.txt, semantic HTML landmarks throughout
-- 🌍 **Any domain via one env var** — `VITE_SITE_URL` propagates to all SEO
+- 🌍 **Any domain via one env var** - `VITE_SITE_URL` propagates to all SEO
   files and meta tags at build time
-- 📄 **CV generator** — `scripts/generate-cv.mjs` writes a clean one-page PDF
+- 📄 **CV generator** - `scripts/generate-cv.mjs` writes a clean one-page PDF
   from your content
-- ⚡ **Fast** — Three.js lazy-loaded as its own chunk, immutable asset caching
+- ⚡ **Fast** - Three.js lazy-loaded as its own chunk, immutable asset caching
   configured on every platform
 
 ## 🚀 One-click deploy
@@ -81,11 +81,11 @@ npm ci && npm run build
 npx wrangler deploy
 ```
 
-Or connect the repo in the Cloudflare dashboard — build command
+Or connect the repo in the Cloudflare dashboard - build command
 `npm run build`, deploy command `npx wrangler deploy` (the default).
 
 > After deploying, set your env vars (site URL + SMTP or Resend) in the
-> platform dashboard — see [DEPLOYMENT.md](DEPLOYMENT.md) for the full guide.
+> platform dashboard - see [DEPLOYMENT.md](DEPLOYMENT.md) for the full guide.
 
 ## 🛠️ Quick start
 
@@ -106,36 +106,36 @@ npm start              # → http://localhost:3000 (serves dist/ + /api/contact)
 
 ## ⚙️ Configuration
 
-### 1. Your content — one file
+### 1. Your content - one file
 
 Everything editable lives in **`src/data/content.ts`**: profile, hero copy,
 skills, projects (with screenshots + gradients + links), experience, education,
 socials. The CV, marquee and all sections read from it.
 
-### 2. Environment — `.env`
+### 2. Environment - `.env`
 
 | Variable | Purpose |
 |---|---|
-| `VITE_SITE_URL` | Canonical domain — injected into all SEO files/meta at build |
+| `VITE_SITE_URL` | Canonical domain - injected into all SEO files/meta at build |
 | `SMTP_HOST` `SMTP_PORT` `SMTP_USER` `SMTP_PASS` `SMTP_SECURE` | SMTP server for the contact form |
 | `MAIL_FROM` / `MAIL_TO` | From header / inbox receiving messages |
-| `RESEND_API_KEY` | Cloudflare only (Workers can't open SMTP sockets) — free at [resend.com](https://resend.com) |
+| `RESEND_API_KEY` | Cloudflare only (Workers can't open SMTP sockets) - free at [resend.com](https://resend.com) |
 | `PORT` | For `node server.js` (Render/Heroku) |
 
-**Gmail example** — `SMTP_HOST=smtp.gmail.com`, `SMTP_PORT=587`,
+**Gmail example** - `SMTP_HOST=smtp.gmail.com`, `SMTP_PORT=587`,
 `SMTP_SECURE=false`, `SMTP_PASS` = an [App Password](https://myaccount.google.com/apppasswords).
 
 ### 3. Make it yours
 
-- **Domain** — `VITE_SITE_URL=https://yourdomain.com npm run build`
+- **Domain** - `VITE_SITE_URL=https://yourdomain.com npm run build`
   regenerates sitemap, robots.txt, llms.txt and every meta tag
-- **Logo** — replace `public/favicon.svg` (mark-only copy in `public/logo.svg`)
-- **Screenshots** — drop into `public/screens/` and point each project's
+- **Logo** - replace `public/favicon.svg` (mark-only copy in `public/logo.svg`)
+- **Screenshots** - drop into `public/screens/` and point each project's
   `shot` field at it (missing shots fall back to a gradient cover)
-- **Company logos** — `public/logos/` + one line in `Experience.tsx`
-- **Your photo** — replace `public/profile.webp`
-- **CV** — edit content then `node scripts/generate-cv.mjs`
-- **Colors/fonts** — CSS variables at the top of `src/index.css`
+- **Company logos** - `public/logos/` + one line in `Experience.tsx`
+- **Your photo** - replace `public/profile.webp`
+- **CV** - edit content then `node scripts/generate-cv.mjs`
+- **Colors/fonts** - CSS variables at the top of `src/index.css`
 
 ## 📁 Project structure
 
@@ -164,7 +164,7 @@ target, an extra sender) open a PR.
 
 ## 📄 License
 
-Released under the [MIT License](LICENSE) — free to use, modify and deploy
+Released under the [MIT License](LICENSE) - free to use, modify and deploy
 for your own portfolio. A star ⭐ is appreciated!
 
 ---

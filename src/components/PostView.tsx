@@ -4,7 +4,7 @@ import type { Post } from "../data/posts";
 import { Rich } from "./CaseStudy";
 
 /**
- * Inline links in post bodies may be hash routes ("#/contact") — make
+ * Inline links in post bodies may be hash routes ("#/contact") - make
  * plain-text paragraphs support [text](href) links without markdown deps.
  */
 function LinkedRich({ text }: { text: string }) {
