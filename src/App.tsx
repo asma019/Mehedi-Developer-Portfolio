@@ -19,6 +19,13 @@ import { BackToTop, Cursor } from "./components/ui";
 import { getCase } from "./data/cases";
 import { getPost } from "./data/posts";
 import { SITE } from "./data/site";
+import {
+  applyHead,
+  BLOG_HEAD_DESCRIPTION,
+  blogJsonLd,
+  caseJsonLd,
+  postJsonLd,
+} from "./lib/head";
 
 /** The site is a single page with hash navigation - any real pathname
  *  other than the root, /index.html or /blog is a 404. (/blog is served
@@ -105,10 +112,14 @@ export default function App() {
     return () => window.removeEventListener("hashchange", onHash);
   }, []);
 
-  /* Content views: scroll to top and retitle. Returning home with a
-     section hash (e.g. from "All work" → #projects) scrolls to that
+  /* Content views: scroll to top, retitle, and apply per-route SEO
+     metadata (description, canonical, OG, JSON-LD). Returning home with
+     a section hash (e.g. from "All work" → #projects) scrolls to that
      section after the home view has re-mounted. */
   useEffect(() => {
+    const site = (
+      (import.meta.env.VITE_SITE_URL as string | undefined) || "https://mehedims.com"
+    ).replace(/\/+$/, "");
     const wasView = prevView.current !== "home";
     if (route.view === "home") {
       if (wasView && route.hash) {
@@ -117,18 +128,55 @@ export default function App() {
           document.getElementById(id)?.scrollIntoView({ behavior: "smooth" }),
         );
       }
-      document.title = SITE.title;
+      applyHead(
+        { title: SITE.title, description: SITE.description, canonical: "/" },
+        site,
+      );
     } else if (route.view === "blog") {
       window.scrollTo({ top: 0 });
-      document.title = `Blog - ${SITE.name}`;
+      applyHead(
+        {
+          title: `Blog - ${SITE.name}`,
+          description: BLOG_HEAD_DESCRIPTION,
+          canonical: "/blog/",
+          jsonLd: blogJsonLd(site),
+        },
+        site,
+      );
+    } else if (route.view === "case") {
+      window.scrollTo({ top: 0 });
+      const data = getCase(route.slug);
+      if (data) {
+        applyHead(
+          {
+            title: `${data.title} - ${SITE.name}`,
+            description: data.summary,
+            canonical: `/case/${data.slug}/`,
+            ogType: "article",
+            jsonLd: caseJsonLd(data, site),
+          },
+          site,
+        );
+      } else {
+        document.title = `Not found - ${SITE.name}`;
+      }
     } else {
       window.scrollTo({ top: 0 });
-      const label =
-        route.view === "case"
-          ? getCase(route.slug)?.title
-          : getPost(route.slug)?.title;
-      if (label) document.title = `${label} - ${SITE.name}`;
-      else document.title = "Not found - Mehedi Hasan";
+      const post = getPost(route.slug);
+      if (post) {
+        applyHead(
+          {
+            title: `${post.title} - ${SITE.name}`,
+            description: post.excerpt,
+            canonical: `/blog/${post.slug}/`,
+            ogType: "article",
+            jsonLd: postJsonLd(post, site),
+          },
+          site,
+        );
+      } else {
+        document.title = `Not found - ${SITE.name}`;
+      }
     }
     prevView.current = route.view;
   }, [route]);

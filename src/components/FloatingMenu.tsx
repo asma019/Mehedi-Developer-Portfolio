@@ -16,6 +16,7 @@ import {
   Briefcase,
   GraduationCap,
   Mail,
+  BookOpen,
   type LucideIcon,
 } from "lucide-react";
 import { navLinks, profile } from "../data/content";
@@ -26,6 +27,7 @@ const linkIcons: Record<string, LucideIcon> = {
   "#projects": LayoutGrid,
   "#experience": Briefcase,
   "#education": GraduationCap,
+  "/blog": BookOpen,
   "#contact": Mail,
 };
 
