@@ -76,6 +76,30 @@ platform's dashboard for deployments.
 
 ---
 
+## Deplo (self-hosted, incl. Raspberry Pi)
+
+On a self-hosted Deplo server (Raspberry Pi or any x86-64/ARM box),
+use the repo's **Dockerfile** as the build method instead of the
+auto-detect (Railpack) path:
+
+1. Create the app, point it at this repo.
+2. In the app's build settings pick **Dockerfile** as the build method.
+3. Set the same env vars as the table above (`VITE_SITE_URL`, `SMTP_*`,
+   `MAIL_*`); Deplo injects them into the container at run time.
+   Deplo assigns the public port; `server.js` reads `PORT`.
+
+Why: Railpack builds are currently broken on ARM hosts — Deplo's agent
+requests a `railpack-v…-aarch64-unknown-linux-musl.tar.gz` asset, but
+railpack publishes releases under `arm64` naming, so the download 404s
+on every ARM machine and every railpack version. A Dockerfile build
+skips that step entirely.
+
+The Dockerfile is multi-arch: `node:22-bookworm-slim` publishes
+variants for **AMD64 (x86-64), ARM64 (aarch64) and ARM32v7** and Docker
+selects the right one for the host CPU, so the same file builds on a
+x86-64 VPS and on a Raspberry Pi. (Actual floor: ARM32v7 — Raspberry Pi
+Zero/1 are ARMv6 and have no official Node ≥ 20 binaries.)
+
 ## Local production test
 
 ```bash

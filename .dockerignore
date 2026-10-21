@@ -1,0 +1,22 @@
+# Keep the build context small and keep secrets out of images
+node_modules/
+dist/
+.git/
+.github/
+.claude/
+.zcode/
+.wrangler/
+.vercel/
+.netlify/
+.netlify-cache/
+
+# Never bake secrets into an image
+.env
+.env.local
+.env.*.local
+
+# Local build artifacts / junk
+*.log
+.DS_Store
+tsconfig.tsbuildinfo
+docs/
