@@ -9,6 +9,7 @@ import Projects from "./components/Projects";
 import Experience from "./components/Experience";
 import Education from "./components/Education";
 import Writing from "./components/Writing";
+import Faq from "./components/Faq";
 import Contact from "./components/Contact";
 import Footer from "./components/Footer";
 import NotFound from "./components/NotFound";
@@ -229,6 +230,7 @@ export default function App() {
           <Experience />
           <Education />
           <Writing />
+          <Faq />
           <Contact />
         </main>
         <Footer />
