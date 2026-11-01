@@ -141,12 +141,15 @@ export function ShotCover({
   shot,
   gradient,
   icon,
+  alt = "",
   className = "",
   children,
 }: {
   shot?: string;
   gradient: string;
   icon?: ReactNode;
+  /** Meaningful alt for screenshot covers; decorative callers leave "" */
+  alt?: string;
   className?: string;
   children?: ReactNode;
 }) {
@@ -161,7 +164,7 @@ export function ShotCover({
         <>
           <img
             src={shot}
-            alt=""
+            alt={alt}
             loading="lazy"
             onError={() => setFailed(true)}
             className="h-full w-full object-cover transition-transform duration-700 ease-out group-hover:scale-[1.06]"

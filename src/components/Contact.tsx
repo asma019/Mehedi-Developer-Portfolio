@@ -13,7 +13,7 @@ import {
   Send,
   AlertCircle,
 } from "lucide-react";
-import { contact, profile, getEmail } from "../data/content";
+import { contact, profile, faq, getEmail } from "../data/content";
 import { SectionShell, Reveal, SpotlightCard, Magnetic } from "./ui";
 
 const email = getEmail();
@@ -211,6 +211,27 @@ export default function Contact() {
                   />
                 </a>
               ))}
+            </div>
+          </Reveal>
+
+          <Reveal delay={0.4}>
+            <div className="mt-12 max-w-md">
+              <h3 className="font-display text-lg font-semibold tracking-tight text-ink">
+                Frequently asked
+              </h3>
+              <div className="mt-4 space-y-3">
+                {faq.items.map((item) => (
+                  <div
+                    key={item.q}
+                    className="glass rounded-2xl border border-line p-5"
+                  >
+                    <p className="text-[15px] font-semibold text-ink">{item.q}</p>
+                    <p className="mt-1.5 text-sm leading-relaxed text-muted">
+                      {item.a}
+                    </p>
+                  </div>
+                ))}
+              </div>
             </div>
           </Reveal>
         </div>

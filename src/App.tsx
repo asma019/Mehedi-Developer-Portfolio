@@ -22,6 +22,7 @@ import { SITE } from "./data/site";
 import {
   applyHead,
   BLOG_HEAD_DESCRIPTION,
+  BLOG_HEAD_TITLE,
   blogJsonLd,
   caseJsonLd,
   postJsonLd,
@@ -149,7 +150,7 @@ export default function App() {
       window.scrollTo({ top: 0 });
       applyHead(
         {
-          title: `Blog - ${SITE.name}`,
+          title: BLOG_HEAD_TITLE,
           description: BLOG_HEAD_DESCRIPTION,
           canonical: "/blog/",
           jsonLd: blogJsonLd(site),

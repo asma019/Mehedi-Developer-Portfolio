@@ -58,8 +58,11 @@ export function postJsonLd(
   };
 }
 
-/** Blog (collection) schema for the /blog index */
-export function blogJsonLd(siteUrl: string) {
+/** Blog index SEO title (shared with the build's prerendered heads). */
+export const BLOG_HEAD_TITLE =
+  "Blog - WordPress speed, hosting & support notes - Mehedi Hasan";
+
+/** Blog (collection) schema for the /blog index */export function blogJsonLd(siteUrl: string) {
   return {
     "@context": "https://schema.org",
     "@type": "Blog",

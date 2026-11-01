@@ -83,7 +83,7 @@ export default function CaseStudy({ data }: { data: CaseData }) {
             transition={{ delay: 0.18 }}
             className="group mt-12 overflow-hidden rounded-[2rem] border border-line shadow-2xl"
           >
-            <ShotCover shot={data.shot} gradient={data.gradient} className="aspect-[16/9]">
+            <ShotCover shot={data.shot} gradient={data.gradient} alt={data.name} className="aspect-[16/9]">
               <span className="absolute bottom-4 right-5 rounded-full bg-black/25 px-3 py-1 text-xs font-medium text-white backdrop-blur-md">
                 {data.name}
               </span>

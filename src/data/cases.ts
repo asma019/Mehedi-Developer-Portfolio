@@ -41,7 +41,7 @@ export const cases: Record<string, CaseData> = {
     role: "Design, build & operations",
     stack: ["Go", "miekg/dns", "PostgreSQL", "Redis", "SSE", "Caddy"],
     summary:
-      "A free suite of network utilities - analyse any domain's DNS, WHOIS and email security, or look up ASN, IP address and network prefix details. Built to answer 'what's wrong with this domain?' in seconds, not clicks.",
+      "Free network utilities: analyse any domain's DNS, WHOIS and email security in one instant lookup. Built in Go with PostgreSQL, Redis and SSE streaming.",
     shot: "/screens/bd-tools.jpg",
     gradient: "from-[#0071e3] via-[#4a6cf7] to-[#7d4bff]",
     // TODO(mehedi): replace with real, verified numbers - the page hides

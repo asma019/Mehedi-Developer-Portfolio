@@ -6,7 +6,8 @@ import { join } from "node:path";
 import { SITE } from "./src/data/site";
 import { posts } from "./src/data/posts";
 import { cases } from "./src/data/cases";
-import { BLOG_HEAD_DESCRIPTION } from "./src/lib/head";
+import { BLOG_HEAD_DESCRIPTION, BLOG_HEAD_TITLE } from "./src/lib/head";
+import { faq } from "./src/data/content";
 
 /**
  * Fills the %SITE_*% placeholders in index.html from src/data/site.ts -
@@ -17,11 +18,23 @@ function injectSiteMeta(): Plugin {
   return {
     name: "inject-site-meta",
     transformIndexHtml(html) {
+      // FAQPage schema for the home page - generated from the same
+      // content.ts data the visible FAQ renders, so they can't drift.
+      const faqJsonLd = {
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        mainEntity: faq.items.map((f) => ({
+          "@type": "Question",
+          name: f.q,
+          acceptedAnswer: { "@type": "Answer", text: f.a },
+        })),
+      };
       return html
         .replaceAll("%SITE_TITLE%", SITE.title)
         .replaceAll("%SITE_DESCRIPTION%", SITE.description)
         .replaceAll("%SITE_TAGLINE%", SITE.tagline)
-        .replaceAll("%SITE_NAME%", SITE.name);
+        .replaceAll("%SITE_NAME%", SITE.name)
+        .replaceAll("%FAQ_JSONLD%", `${JSON.stringify(faqJsonLd)},`);
     },
   };
 }
@@ -147,7 +160,7 @@ ${posts
 - [Tools.BD](https://tools.bd/) - free network & domain tools: DNS, WHOIS, email-security analysis, ASN/IP/prefix lookup. Built with Go, PostgreSQL, Redis, SSE, Caddy.
 - [AsiaBio Link](https://asiabio.link/) - URL shortener for developers and marketers, built in Laravel.
 - [BuyAPet UK](https://buyapet.co.uk/) - UK pet classifieds marketplace; theme updates and speed optimization.
-- [CodeXSell](https://codexsell.com/) - GPL digital-products marketplace (1800+ themes/plugins, memberships, admin panel), full Laravel build.
+- [CodeXSell](https://codexsell.com/) - GPL digital-products marketplace (2000+ themes/plugins, memberships, admin panel), full Laravel build.
 - [Zeely Realty](https://zeelyrealty.com/) - real-estate buy/rent broker platform, full Laravel system.
 - [Diploma ICU](https://diploma.icu/) - blog and resources for Bangladeshi students; custom WordPress theme and content.
 - [Saajkonna](https://saajkonna.com/) - WooCommerce beauty e-commerce, end-to-end speed optimization.
@@ -257,12 +270,19 @@ Available for freelance projects. Reach out through the website contact form at 
           site,
         );
         writeFileSync(join(dist, "index.html"), index);
-        writeFileSync(join(dist, "404.html"), index);
+        // 404 serves real error statuses and must never be indexed.
+        writeFileSync(
+          join(dist, "404.html"),
+          index.replace(
+            /<meta name="robots" content="[^"]*"/,
+            '<meta name="robots" content="noindex, follow"',
+          ),
+        );
         mkdirSync(join(dist, "blog"), { recursive: true });
         writeFileSync(
           join(dist, "blog", "index.html"),
           withRouteHead(index, {
-            title: `Blog - ${SITE.name}`,
+            title: BLOG_HEAD_TITLE,
             description: BLOG_HEAD_DESCRIPTION,
             canonical: "/blog/",
             jsonLd: {

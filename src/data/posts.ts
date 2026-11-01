@@ -30,7 +30,7 @@ export const posts: Post[] = [
     date: "2026-10-20",
     readingTime: "7 min",
     excerpt:
-      "The order I actually work through: measure first, then caching, images, assets and hosting. Each step is cheap to try, and doing them in the wrong order wastes both.",
+      "The order I work through a slow WordPress site: measure first, then caching, images, assets and hosting. Cheap fixes first, done in the right order.",
     tags: ["WordPress", "Performance", "Core Web Vitals"],
     body: [
       {
@@ -86,7 +86,7 @@ export const posts: Post[] = [
       { type: "h2", text: "The wrap-up" },
       {
         type: "p",
-        text: "Run the same measurements, put the after numbers next to the before, and hand over a one-page summary of what changed. That document is the difference between \"we made it faster\" and a client who comes back with their other sites. Some of my longest-running client relationships started from exactly one of these summaries.",
+        text: "Run the same measurements, put the after numbers next to the before, and hand over a one-page summary of what changed. That document is the difference between \"we made it faster\" and a client who comes back with their other sites. Some of my longest-running client relationships started from exactly one of these summaries, and keeping the [handover](/blog/smoother-project-handoffs/) as tidy as the audit is what earned them.",
       },
       {
         type: "p",
@@ -100,7 +100,7 @@ export const posts: Post[] = [
     date: "2026-10-20",
     readingTime: "8 min",
     excerpt:
-      "I have spent years answering hosting and infrastructure tickets. The reports that get fixed fastest all look the same. This is what to include, why it works, and what support engineers privately wish you knew.",
+      "What to include in a support ticket so it gets fixed in one reply - and what support engineers privately wish every report contained.",
     tags: ["Support", "Debugging", "Hosting"],
     body: [
       {
@@ -135,7 +135,7 @@ export const posts: Post[] = [
       { type: "h2", text: "Try the boring separations first" },
       {
         type: "p",
-        text: "Before you file anything, rule out the two layers that cause most false alarms. Another browser or a private window (this kills cache and extension theories instantly). A second network or device (this kills local DNS and ISP theories). If the problem follows the site, it is server side. If it follows your machine, no ticket was needed. Either way you now know something the engineer would have spent their first reply testing.",
+        text: "Before you file anything, rule out the two layers that cause most false alarms. Another browser or a private window (this kills cache and extension theories instantly). A second network or device (this kills local DNS and ISP theories - [the DNS post](/blog/dns-records-that-matter/) shows how to test that layer properly). If the problem follows the site, it is server side. If it follows your machine, no ticket was needed. Either way you now know something the engineer would have spent their first reply testing.",
       },
       { type: "h2", text: "Say what you already tried" },
       {
@@ -234,12 +234,12 @@ export const posts: Post[] = [
     date: "2026-10-20",
     readingTime: "9 min",
     excerpt:
-      "I built a DNS lookup tool, so here is the plain-language tour of the record types that actually decide whether your site and your mail work, and the propagation myth that wastes half of everyone's afternoon.",
+      "A plain-language tour of the DNS record types that decide whether your site and email work - and the propagation myth that wastes your afternoon.",
     tags: ["DNS", "Infrastructure", "Email Deliverability"],
     body: [
       {
         type: "p",
-        text: "DNS is the invisible layer of every website and every mailbox, and it is the layer people touch least, understand least, and break most expensively. I built Tools.BD mostly out of my own frustration with the tools I kept reaching for in support tickets. Here is the tour I wish clients could read before they email in.",
+        text: "DNS is the invisible layer of every website and every mailbox, and it is the layer people touch least, understand least, and break most expensively. I built [Tools.BD](/case/tools-bd/) mostly out of my own frustration with the tools I kept reaching for in support tickets. Here is the tour I wish clients could read before they email in.",
       },
       { type: "h2", text: "First: which nameservers, then which records" },
       {
@@ -280,7 +280,7 @@ export const posts: Post[] = [
       { type: "h2", text: "PTR: the record nobody owns but should" },
       {
         type: "p",
-        text: "PTR is the reverse lookup, IP back to name, and it lives with whoever owns the IP, so it lives with your hosting company, not in your DNS panel. Receiving mail servers check it: a sending IP with no PTR, or a PTR that does not match the EHLO name, is a strong spam signal no amount of clean content can fix. If you run your own mail on a VPS, the PTR is one support ticket away, and it is the ticket most senders never think to open.",
+        text: "PTR is the reverse lookup, IP back to name, and it lives with whoever owns the IP, so it lives with your hosting company, not in your DNS panel. Receiving mail servers check it: a sending IP with no PTR, or a PTR that does not match the EHLO name, is a strong spam signal no amount of clean content can fix. If you run your own mail on a VPS, the PTR is one support ticket away - write it like [this](/blog/reproducible-support-questions/) and it gets resolved in a single reply.",
       },
       { type: "h2", text: "TTL, and the propagation myth" },
       {

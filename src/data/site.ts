@@ -15,7 +15,7 @@ export const SITE = {
 
   /** <meta name="description"> + schema.org description */
   description:
-    "Mehedi Hasan is a web developer and technical support engineer from Khulna, Bangladesh - combining frontend craftsmanship with real WordPress, hosting, and cloud operations experience to make websites faster, clearer, and easier to maintain.",
+    "Web developer & support engineer from Khulna, Bangladesh. I build fast, reliable websites in React, Next.js and WordPress - 15+ projects delivered.",
 
   /** og:description / twitter:description + llms.txt intro */
   tagline:

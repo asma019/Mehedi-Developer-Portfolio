@@ -59,6 +59,7 @@ function CoverArt({
     <ShotCover
       shot={project.shot}
       gradient={project.gradient}
+      alt={project.name}
       className={`rounded-[1.6rem] ${tall ? "h-36 sm:h-44" : "aspect-[16/9]"}`}
       icon={
         <Icon

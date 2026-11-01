@@ -58,7 +58,7 @@ export const marqueeItems = [
 
 export const about = {
   eyebrow: "About",
-  title: "Development, backed by real operations.",
+  title: "Web development, backed by real hosting operations.",
   paragraphs: [
     "I work at the intersection of web development, WordPress systems, hosting operations and practical user support. That means I don't just build responsive, understandable web systems - I improve existing sites so they remain reliable after launch.",
     "I value clear scope, careful delivery and responsive-by-default design. My goal is always to leave a project in a condition that clients and teams can confidently operate on their own afterward.",
@@ -117,7 +117,7 @@ export const skills = {
 export const projects = {
   eyebrow: "Selected Work",
   title: "Work that survives launch day.",
-  sub: "Platforms, marketplaces and stores - designed, built or rescued.",
+  sub: "Websites, marketplaces and platforms in React, Next.js, Laravel and WordPress - designed, built or rescued.",
   items: [
     {
       name: "Tools.BD",
@@ -149,7 +149,7 @@ export const projects = {
       category: "WordPress",
       year: "2025",
       description:
-        "The UK's fast-growing pet classifieds - puppies, kittens and more. I handled theme updates and speed optimization so browsing stays snappy across hundreds of listings.",
+        "A fast-growing UK pet classifieds - puppies, kittens and more. I handled theme updates and speed optimization so browsing stays snappy across hundreds of listings.",
       tags: ["WordPress", "Speed Optimization", "SEO"],
       link: "https://buyapet.co.uk/",
       shot: "/screens/buyapet.jpg",
@@ -161,7 +161,7 @@ export const projects = {
       category: "Full-stack",
       year: "2026",
       description:
-        "A GPL WordPress marketplace with 1800+ themes and plugins, membership tiers, download quotas and an auto-updater - the full system, admin panel included, built in Laravel.",
+        "A GPL WordPress marketplace with 2000+ themes and plugins on the shelves, membership tiers, download quotas and an auto-updater - the full system, admin panel included, built in Laravel.",
       tags: ["Laravel", "PHP", "Admin Panel", "Memberships"],
       link: "https://codexsell.com/",
       shot: "/screens/codexsell.jpg",
@@ -199,7 +199,7 @@ export const projects = {
       category: "Performance",
       year: "2023",
       description:
-        "A WooCommerce beauty store with 100+ brands and nationwide delivery in Bangladesh - I optimized it end to end, and it now loads fast.",
+        "A WooCommerce beauty store with a wide range of brands and nationwide delivery in Bangladesh - I optimized it end to end, and it now loads fast.",
       tags: ["WordPress", "WooCommerce", "Speed Optimization"],
       link: "https://saajkonna.com/",
       shot: "/screens/saajkonna.jpg",
@@ -290,7 +290,7 @@ export const education = {
 
 export const writing = {
   eyebrow: "Notes",
-  title: "Writing & notes on craft.",
+  title: "Writing & notes - WordPress, hosting and support.",
   items: [
     {
       title: "WordPress performance audits",
@@ -310,6 +310,12 @@ export const writing = {
       excerpt:
         "Leaving projects in a condition clients and teams can confidently operate afterward - docs, access and decisions.",
     },
+    {
+      title: "DNS records, explained by someone who runs them for a living",
+      slug: "dns-records-that-matter",
+      excerpt:
+        "A plain-language tour of the record types that decide whether your site and email work - plus the propagation myth that wastes half your afternoon.",
+    },
   ],
 };
 
@@ -322,6 +328,29 @@ export const contact = {
     { label: "LinkedIn", href: "https://www.linkedin.com/in/mehedims1/" },
     { label: "Upwork", href: "https://upwork.com/freelancers/~01f39b319379efc4d6" },
     { label: "Fiverr", href: "https://www.fiverr.com/mehedims1" },
+  ],
+};
+
+export const faq = {
+  eyebrow: "FAQ",
+  title: "Quick answers before you write.",
+  items: [
+    {
+      q: "What do you build?",
+      a: "Marketing sites, full-stack products in React, Next.js, Laravel and Go, and performance-focused WordPress work - usually designed, built and handed over with documentation included.",
+    },
+    {
+      q: "Can you speed up my existing WordPress site?",
+      a: "Yes - performance work is the most common starting point. I measure the baseline first, apply the fixes in the right order and hand over a one-page summary of what changed.",
+    },
+    {
+      q: "Do you work with international clients?",
+      a: "Yes. I'm based in Khulna, Bangladesh and work with clients worldwide, asynchronously over Upwork, Fiverr or a direct engagement.",
+    },
+    {
+      q: "What does a project handoff include?",
+      a: "Documentation, knowledge transfer and a walkthrough of the codebase, so your team can operate the project confidently afterward. There's a full post about it on the blog.",
+    },
   ],
 };
 

@@ -63,6 +63,7 @@ function ProjectCard({
       <ShotCover
         shot={project.shot}
         gradient={project.gradient}
+        alt={project.name}
         className={`flex items-center justify-center ${
           featured ? "h-56 md:h-full md:min-h-[19rem]" : "h-48"
         }`}

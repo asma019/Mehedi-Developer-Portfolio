@@ -45,7 +45,7 @@ function Portrait() {
           {photoOk ? (
             <img
               src={profile.photo}
-              alt={profile.name}
+              alt="Portrait of Mehedi Hasan, web developer from Khulna, Bangladesh"
               onError={() => setPhotoOk(false)}
               className="h-full w-full object-cover"
             />
