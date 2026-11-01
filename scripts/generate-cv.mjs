@@ -29,6 +29,7 @@ const cv = {
       points: [
         "Hosting & cloud troubleshooting across VPS and shared hosting platforms",
         "Operate server and DNS infrastructure behind the hosting brands",
+        "Assist customers with domain, DNS and email deliverability issues",
         "Clear, reproducible communication that turns tickets into solutions",
       ],
     },
