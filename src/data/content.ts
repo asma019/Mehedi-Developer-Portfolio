@@ -32,7 +32,7 @@ export const hero = {
   eyebrow: "Web Developer · Support Engineer",
   headlineA: "I build fast websites",
   headlineB: "that stay fast.",
-  sub: "Developer and technical support engineer from Khulna, Bangladesh - combining frontend craftsmanship with real WordPress, hosting and cloud operations experience, so sites stay reliable long after launch.",
+  sub: "Web developer and support engineer from Khulna, Bangladesh - I build the frontend and handle the WordPress, hosting and cloud operations that keep sites reliable long after launch.",
   primaryCta: { label: "View my work", href: "#projects" },
   secondaryCta: { label: "Get in touch", href: "#contact" },
 };
@@ -60,8 +60,8 @@ export const about = {
   eyebrow: "About",
   title: "Web development, backed by real hosting operations.",
   paragraphs: [
-    "I work at the intersection of web development, WordPress systems, hosting operations and practical user support. That means I don't just build responsive, understandable web systems - I improve existing sites so they remain reliable after launch.",
-    "I value clear scope, careful delivery and responsive-by-default design. My goal is always to leave a project in a condition that clients and teams can confidently operate on their own afterward.",
+    "I build websites and WordPress systems, and I run the hosting and support side that keeps them working - which means improving a site that already exists as often as starting a new one.",
+    "I keep scope clear and delivery careful, then leave the project in a state your team can run on its own afterward - documentation, access and everything needed to operate it.",
   ],
   facts: [
     { label: "Based in", value: "Khulna, Bangladesh" },
@@ -137,7 +137,7 @@ export const projects = {
       category: "Full-stack",
       year: "2026",
       description:
-        "Clinical precision in URL management - a fast, reliable link shortener built for developers, digital marketers and power users. Built in Laravel.",
+        "A fast, reliable link shortener for developers, digital marketers and power users. Built in Laravel.",
       tags: ["Laravel", "URL Shortener", "Analytics"],
       link: "https://asiabio.link/",
       shot: "/screens/asiabio-link.jpg",
@@ -175,7 +175,7 @@ export const projects = {
       category: "Full-stack",
       year: "2026",
       description:
-        "A buy-and-rent real estate broker platform - property listings, broker workflow and search, built as a complete Laravel system from the ground up.",
+        "A buy-and-rent real estate broker platform - property listings, broker workflow and search, as a complete Laravel system.",
       tags: ["Laravel", "PHP", "MySQL", "Listings"],
       link: "https://zeelyrealty.com/",
       shot: "/screens/zeely-realty.jpg",
@@ -187,7 +187,7 @@ export const projects = {
       category: "WordPress",
       year: "2024",
       description:
-        "A blog for Bangladeshi students - I built the custom WordPress theme and wrote student-focused content to grow the audience.",
+        "A blog for Bangladeshi students. I built the custom WordPress theme and wrote the content that grew the audience.",
       tags: ["WordPress", "Theme Development", "Content"],
       link: "https://diploma.icu/",
       shot: "/screens/diploma-icu.jpg",
@@ -207,7 +207,7 @@ export const projects = {
     },
   ],
   more:
-    "…plus 15+ full-stack applications and responsive websites delivered for a global client base on Upwork & Fiverr.",
+    "…plus 15+ more full-stack applications and responsive websites for clients on Upwork & Fiverr.",
 };
 
 export const experience = {
