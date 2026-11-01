@@ -10,7 +10,6 @@ CV (PDF): https://mehedims.com/Mehedi-Hasan-CV.pdf
 - Full-stack web development - React, Next.js, Go, PHP/Laravel, Python, MySQL, PostgreSQL, Redis
 - WordPress performance - audits, LiteSpeed caching, Core Web Vitals wins
 - Hosting & server operations - NGINX, Caddy, VPS setup (Ubuntu/AlmaLinux/Debian), cPanel, CloudPanel
-- DNS infrastructure - PowerDNS clusters, PTR/rDNS management, WHMCS integrations
 - Technical support - hosting & cloud troubleshooting with clear, reproducible communication
 
 ## Projects
@@ -22,8 +21,6 @@ CV (PDF): https://mehedims.com/Mehedi-Hasan-CV.pdf
 - [Zeely Realty](https://zeelyrealty.com/) - real-estate buy/rent broker platform, full Laravel system.
 - [Diploma ICU](https://diploma.icu/) - blog and resources for Bangladeshi students; custom WordPress theme and content.
 - [Saajkonna](https://saajkonna.com/) - WooCommerce beauty e-commerce, end-to-end speed optimization.
-- PowerDNS Cluster - redundant DNS infrastructure with API for hosting brands.
-- WHMCS modules - PowerDNS PTR Manager, PowerDNS DNS Manager, and Easy Product Transfer.
 
 ## Experience
 

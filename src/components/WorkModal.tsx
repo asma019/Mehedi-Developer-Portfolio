@@ -5,14 +5,10 @@ import {
   ArrowUpRight,
   ArrowLeft,
   ArrowRight,
-  ArrowLeftRight,
   Wrench,
   Dog,
   Link2,
   GraduationCap,
-  Globe,
-  Network,
-  Send,
   LayoutDashboard,
   Package,
   ShoppingCart,
@@ -44,10 +40,6 @@ const coverIcons: Record<string, LucideIcon> = {
   "Zeely Realty": LayoutDashboard,
   "Diploma ICU": GraduationCap,
   "Saajkonna": ShoppingCart,
-  "PowerDNS Cluster": Network,
-  "WHMCS PowerDNS PTR Manager": ArrowLeftRight,
-  "WHMCS PowerDNS DNS Manager": Globe,
-  "WHMCS Easy Product Transfer": Send,
 };
 
 const iconOf = (name: string) => coverIcons[name] ?? Sparkles;

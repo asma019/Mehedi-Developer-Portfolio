@@ -48,7 +48,6 @@ export const marqueeItems = [
   "PHP · Laravel",
   "NGINX",
   "Caddy",
-  "PowerDNS",
   "VPS Setup",
   "cPanel",
   "PostgreSQL · Redis",
@@ -206,50 +205,6 @@ export const projects = {
       shot: "/screens/saajkonna.jpg",
       gradient: "from-[#f43f5e] via-[#fb7185] to-[#fda4af]",
     },
-    {
-      name: "PowerDNS Cluster",
-      kind: "DNS Infrastructure",
-      category: "Infrastructure",
-      year: "2026",
-      description:
-        "A redundant PowerDNS cluster with API access powering DNS for the hosting brands - built for high availability, fast propagation and easy automation.",
-      tags: ["PowerDNS", "High Availability", "Linux", "API"],
-      link: "#",
-      gradient: "from-[#0ea5e9] via-[#38bdf8] to-[#7dd3fc]",
-    },
-    {
-      name: "WHMCS PowerDNS PTR Manager",
-      kind: "WHMCS Module",
-      category: "WHMCS",
-      year: "2026",
-      description:
-        "A WHMCS module that lets users and admins easily manage PTR records and rDNS blocks - self-service PTR management wired straight into the PowerDNS cluster.",
-      tags: ["WHMCS", "PowerDNS", "PHP", "rDNS"],
-      link: "#",
-      gradient: "from-[#8b5cf6] via-[#818cf8] to-[#a5b4fc]",
-    },
-    {
-      name: "WHMCS PowerDNS DNS Manager",
-      kind: "WHMCS Module",
-      category: "WHMCS",
-      year: "2026",
-      description:
-        "Full DNS zone management inside WHMCS for customers who buy domains on the platform - records, zones and propagation, all self-service.",
-      tags: ["WHMCS", "PowerDNS", "Domains", "PHP"],
-      link: "#",
-      gradient: "from-[#10b981] via-[#2dd4bf] to-[#99f6e4]",
-    },
-    {
-      name: "WHMCS Easy Product Transfer",
-      kind: "WHMCS Module",
-      category: "WHMCS",
-      year: "2026",
-      description:
-        "One-click transfer of any product or service between WHMCS clients - moving hosting, domains and services without support tickets.",
-      tags: ["WHMCS", "PHP", "Automation"],
-      link: "#",
-      gradient: "from-[#f59e0b] via-[#fbbf24] to-[#fde68a]",
-    },
   ],
   more:
     "…plus 15+ full-stack applications and responsive websites delivered for a global client base on Upwork & Fiverr.",
@@ -267,9 +222,8 @@ export const experience = {
       summary:
         "Supporting the SatisfyHost and BengalCloud brands - helping customers resolve hosting and cloud-service issues through clear, dependable technical guidance.",
       points: [
-        "Hosting & cloud troubleshooting across VPS, cPanel and custom PowerDNS infrastructure",
-        "Built and operate a redundant PowerDNS cluster for the SatisfyHost and BengalCloud brands",
-        "Developed WHMCS modules - PowerDNS PTR & DNS managers and easy product transfer",
+        "Hosting & cloud troubleshooting across VPS and shared hosting platforms",
+        "Operate server and DNS infrastructure behind the hosting brands",
         "Clear, reproducible communication that turns tickets into solutions",
       ],
     },

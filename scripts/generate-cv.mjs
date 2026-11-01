@@ -27,9 +27,8 @@ const cv = {
       summary:
         "Supporting the SatisfyHost and BengalCloud brands - helping customers resolve hosting and cloud-service issues through clear, dependable technical guidance.",
       points: [
-        "Hosting & cloud troubleshooting across VPS, cPanel and custom PowerDNS infrastructure",
-        "Built and operate a redundant PowerDNS cluster for the SatisfyHost and BengalCloud brands",
-        "Developed WHMCS modules - PowerDNS PTR & DNS managers and easy product transfer",
+        "Hosting & cloud troubleshooting across VPS and shared hosting platforms",
+        "Operate server and DNS infrastructure behind the hosting brands",
         "Clear, reproducible communication that turns tickets into solutions",
       ],
     },

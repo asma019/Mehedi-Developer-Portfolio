@@ -105,7 +105,7 @@ export const posts: Post[] = [
     body: [
       {
         type: "p",
-        text: "I have answered a lot of hosting and infrastructure tickets from the other side: PowerDNS clusters, VPSes, WHMCS installs, the odd 3 a.m. mail outage. Across thousands of them, one pattern holds without exception. The ticket that gets solved fastest is not the angriest one, the oldest one, or the one from the biggest account. It is the one where the problem was reproducible on the first read.",
+        text: "I have answered a lot of hosting and infrastructure tickets from the other side: shared hosting platforms, VPSes, web panels, the odd 3 a.m. mail outage. Across thousands of them, one pattern holds without exception. The ticket that gets solved fastest is not the angriest one, the oldest one, or the one from the biggest account. It is the one where the problem was reproducible on the first read.",
       },
       {
         type: "quote",
@@ -114,7 +114,7 @@ export const posts: Post[] = [
       { type: "h2", text: "The five facts every report needs" },
       {
         type: "p",
-        text: "Whatever the product is (a website, a WHMCS module, a DNS zone, a VPS), a support engineer needs the same handful of facts:",
+        text: "Whatever the product is (a website, a DNS zone, a VPS), a support engineer needs the same handful of facts:",
       },
       {
         type: "list",
@@ -234,12 +234,12 @@ export const posts: Post[] = [
     date: "2026-10-20",
     readingTime: "9 min",
     excerpt:
-      "I operate PowerDNS clusters and built a DNS lookup tool, so here is the plain-language tour of the record types that actually decide whether your site and your mail work, and the propagation myth that wastes half of everyone's afternoon.",
+      "I built a DNS lookup tool, so here is the plain-language tour of the record types that actually decide whether your site and your mail work, and the propagation myth that wastes half of everyone's afternoon.",
     tags: ["DNS", "Infrastructure", "Email Deliverability"],
     body: [
       {
         type: "p",
-        text: "DNS is the invisible layer of every website and every mailbox, and it is the layer people touch least, understand least, and break most expensively. I run PowerDNS clusters behind a few hosting brands and I built Tools.BD mostly out of my own frustration with the tools I kept reaching for in support tickets. Here is the tour I wish clients could read before they email in.",
+        text: "DNS is the invisible layer of every website and every mailbox, and it is the layer people touch least, understand least, and break most expensively. I built Tools.BD mostly out of my own frustration with the tools I kept reaching for in support tickets. Here is the tour I wish clients could read before they email in.",
       },
       { type: "h2", text: "First: which nameservers, then which records" },
       {
